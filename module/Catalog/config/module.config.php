@@ -31,7 +31,7 @@
              'catalog' => array(
                  'type'    => 'segment',
                  'options' => array(
-                     'route'    => '/catalog[/:action][/:id]',
+                     'route'    => '/ram[/:action][/:id]',
                      'constraints' => array(
                          'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                          'id'     => '[0-9]+',
@@ -42,6 +42,31 @@
                      ),
                  ),
              ),
+
+             'checklist' => array(
+                 'type'    => 'segment',
+                 'options' => array(
+                     'route'    => '/checklist',
+                     'constraints' => array( ),
+                     'defaults' => array(
+                         'controller' => 'Catalog\Controller\Catalog',
+                         'action'     => 'checklist',
+                     ),
+                 ),
+             ),
+
+             'order' => array(
+                 'type'    => 'segment',
+                 'options' => array(
+                     'route'    => '/order[/:id]',
+                     'constraints' => array( 'id'     => '[0-9]+' ),
+                     'defaults' => array(
+                         'controller' => 'Catalog\Controller\Catalog',
+                         'action'     => 'order',
+                     ),
+                 ),
+             ),
+
          ),
      ),
 

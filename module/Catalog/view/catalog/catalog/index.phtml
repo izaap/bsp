@@ -1,7 +1,253 @@
-<?php
-	
-	echo '<pre>';
-	foreach ($data as $row) {
-		print_r($row);
-	}
+
+<?php	if( $this->order_links_id ):
+	$url = $this->url('order', array('id' => $order_links_id), array('force_canonical' => false)); 
+	$message = 'Your Order linki is http://bsp.local'.$url;
 ?>
+	<script>
+		alert('<?php echo $message;?>');
+	</script>
+<?php endif; ?>	
+
+<section class="forminfo1 full clearfix">
+
+<?php //echo $url = $this->url('order', array('id' => 999), array('force_canonical' => false)); ?>
+
+	<form  method="post"  >
+
+	<?php
+
+	/*$form = $this->form;
+	$name = $form->get('name');
+	 echo $this->formInput($name);
+	 echo $this->formElementErrors($name);*/
+?>
+
+		<div class="l_sec pull-left">
+
+			<label for="textfield"></label>
+			<?php echo $this->formInput( $this->form->get('name') ); ?>
+			<?php echo $this->formElementErrors()
+						->setMessageOpenFormat('<span class="error">')
+						->setMessageCloseString('</span>')
+						->render($form->get('name')); 
+			?>
+
+			<label for="textfield"></label>
+			<?php echo $this->formInput( $this->form->get('ship_to') ); ?>
+			<?php echo $this->formElementErrors($form->get('ship_to')); ?>
+
+			<label for="textfield"></label>
+			<?php echo $this->formInput( $this->form->get('bill_to') ); ?>
+			<?php echo $this->formElementErrors($form->get('bill_to')); ?>
+
+			<?php echo $this->formTextArea( $this->form->get('notes') ); ?>	
+			<?php echo $this->formElementErrors($form->get('notes')); ?>
+
+			<span><label for="textfield"></label>
+			<?php echo $this->formInput( $this->form->get('start_date') ); ?>
+			<?php echo $this->formElementErrors($form->get('start_date')); ?></span>
+
+			<span class="pull-right"><label for="textfield"></label>
+			<?php echo $this->formInput( $this->form->get('end_date') ); ?>
+			<?php echo $this->formElementErrors($form->get('end_date')); ?></span>
+
+		</div>
+		
+		<div class="r_sec pull-right">
+			<label for="textfield"></label>
+			<?php echo $this->formInput( $this->form->get('po') ); ?>
+			<?php echo $this->formElementErrors($form->get('po')); ?>
+
+			<label for="textfield"></label>
+			<?php echo $this->formInput( $this->form->get('terms') ); ?>
+			<?php echo $this->formElementErrors($form->get('terms')); ?>
+
+			<label for="textfield"></label>
+			<?php echo $this->formInput( $this->form->get('buyer_email') ); ?> 
+			<?php echo $this->formElementErrors($form->get('buyer_email')); ?>
+
+			<label for="textfield"></label>
+			<?php echo $this->formInput( $this->form->get('executive') ); ?> 
+			<?php echo $this->formElementErrors($form->get('executive')); ?>
+
+			<!--<input class="btn btn-primary btn-large pull-right" type="submit" value="CREATE&#x00A;LINK">-->
+			<button type="submit" class="btn btn-primary btn-large pull-right">CREATE<br/>LINK</button>
+			
+		</div>
+	</form>
+</section>
+
+
+
+<div class="checkboxlist clearfix">
+	<ul>
+		<li><label><input name="" type="checkbox" value=""> <b>ALL TOPS</b></label></li>
+		<li><label><input name="" type="checkbox" value=""> TK662-BLK.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 22SK-Brn.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 35PT-blk.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 3PT-peri.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 3SK-cobalt.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 44SK-BLK.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> BL0112-BLK.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> TK662-BLK.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 22SK-Brn.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 35PT-blk.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 3PT-peri.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 3SK-cobalt.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 44SK-BLK.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> BL0112-BLK.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> TK662-BLK.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 22SK-Brn.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 35PT-blk.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 3PT-peri.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 3SK-cobalt.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 44SK-BLK.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> BL0112-BLK.jpeg</label></li>
+	</ul>
+
+	<ul>
+		<li><label><input name="" type="checkbox" value=""> <b>ALL BOTTOMS</b></label></li>
+		<li><label><input name="" type="checkbox" value=""> TK662-BLK.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 22SK-Brn.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 35PT-blk.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 3PT-peri.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 3SK-cobalt.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 44SK-BLK.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> BL0112-BLK.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> TK662-BLK.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 22SK-Brn.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 35PT-blk.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 3PT-peri.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 3SK-cobalt.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 44SK-BLK.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> BL0112-BLK.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> TK662-BLK.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 22SK-Brn.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 35PT-blk.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 3PT-peri.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 3SK-cobalt.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 44SK-BLK.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> BL0112-BLK.jpeg</label></li>
+	</ul>
+
+	<ul>
+		<li><label><input name="" type="checkbox" value=""> <b>ALL TUNICS</b></label></li>
+		<li><label><input name="" type="checkbox" value=""> TK662-BLK.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 22SK-Brn.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 35PT-blk.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 3PT-peri.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 3SK-cobalt.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 44SK-BLK.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> BL0112-BLK.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> TK662-BLK.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 22SK-Brn.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 35PT-blk.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 3PT-peri.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 3SK-cobalt.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 44SK-BLK.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> BL0112-BLK.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> TK662-BLK.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 22SK-Brn.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 35PT-blk.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 3PT-peri.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 3SK-cobalt.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 44SK-BLK.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> BL0112-BLK.jpeg</label></li>
+	</ul>
+
+	<div class="clearfix"></div>
+
+	<ul>
+		<li><label><input name="" type="checkbox" value=""> <b>ALL DRESSES</b></label></li>
+		<li><label><input name="" type="checkbox" value=""> TK662-BLK.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 22SK-Brn.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 35PT-blk.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 3PT-peri.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 3SK-cobalt.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 44SK-BLK.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> BL0112-BLK.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> TK662-BLK.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 22SK-Brn.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 35PT-blk.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 3PT-peri.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 3SK-cobalt.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 44SK-BLK.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> BL0112-BLK.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> TK662-BLK.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 22SK-Brn.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 35PT-blk.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 3PT-peri.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 3SK-cobalt.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 44SK-BLK.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> BL0112-BLK.jpeg</label></li>
+	</ul>
+
+	<ul>
+		<li><label><input name="" type="checkbox" value=""> <b>ALL TANKS</b></label></li>
+		<li><label><input name="" type="checkbox" value=""> TK662-BLK.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 22SK-Brn.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 35PT-blk.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 3PT-peri.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 3SK-cobalt.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 44SK-BLK.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> BL0112-BLK.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> TK662-BLK.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 22SK-Brn.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 35PT-blk.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 3PT-peri.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 3SK-cobalt.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 44SK-BLK.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> BL0112-BLK.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> TK662-BLK.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 22SK-Brn.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 35PT-blk.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 3PT-peri.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 3SK-cobalt.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 44SK-BLK.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> BL0112-BLK.jpeg</label></li>
+	</ul>
+
+	<ul>
+		<li><label><input name="" type="checkbox" value=""> <b>ALL COLORS</b></label></li>
+		<li><label><input name="" type="checkbox" value=""> TK662-BLK.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 22SK-Brn.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 35PT-blk.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 3PT-peri.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 3SK-cobalt.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 44SK-BLK.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> BL0112-BLK.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> TK662-BLK.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 22SK-Brn.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 35PT-blk.jpeg</label></li>
+		<li><label><input name="" type="checkbox" value=""> 3PT-peri.jpeg</label></li>
+	</ul>
+
+	<ul>
+		<li><label><input name="" type="checkbox" value=""> <b>ALL ESSENTIALS</b></label></li>
+		<li><label><input name="" type="checkbox" value=""> <b>ALL CLOSEOUT</b></label></li>
+	</ul>
+
+</div>
+
+<script>
+  $(function() {
+    $( "#start_date" ).datepicker({
+      defaultDate: "+1w",
+      changeMonth: true,
+      numberOfMonths: 1,
+      dateFormat: "yy-mm-dd",
+      onClose: function( selectedDate ) {
+        $( "#end_date" ).datepicker( "option", "minDate", selectedDate );
+      }
+    });
+    $( "#end_date" ).datepicker({
+      defaultDate: "+1w",
+      changeMonth: true,
+      numberOfMonths: 1,
+      dateFormat: "yy-mm-dd",
+      onClose: function( selectedDate ) {
+        $( "#end_date" ).datepicker( "option", "maxDate", selectedDate );
+      }
+    });
+  });
+  </script>

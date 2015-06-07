@@ -9,6 +9,8 @@
  use Zend\Db\ResultSet\HydratingResultSet;
  use Zend\Stdlib\Hydrator\HydratorInterface;
  use Zend\Db\Sql\Sql;
+ use Zend\Db\Sql\Insert;
+ use Zend\Db\Sql\Update;
 
  class ZendDbSqlMapper implements ProductMapperInterface
  {
@@ -72,5 +74,43 @@
 
          return array();
 
+     }
+
+     public function saveOrderLinks( $data = array() )
+     {
+        $action = new Insert('order_links');
+        $action->values($data);
+
+        $sql    = new Sql($this->dbAdapter);
+        $stmt = $sql->prepareStatementForSqlObject($action);
+
+        $result = $stmt->execute();
+
+        if ($result instanceof ResultInterface) 
+        {
+          if ($newId = $result->getGeneratedValue()) 
+          {
+            return $newId;
+          }
+        }
+
+        return false;
+     }
+
+     public function getOrderLink( $id )
+     {
+           $sql    = new Sql($this->dbAdapter);
+           $select = $sql->select('order_links');
+           $select->where(array('id = ?' => $id));
+
+           $stmt   = $sql->prepareStatementForSqlObject($select);
+           $result = $stmt->execute();
+
+           if ($result instanceof ResultInterface && $result->isQueryResult() && $result->getAffectedRows()) 
+           {
+               return $result;
+           }
+
+           throw new \InvalidArgumentException("Product with given ID:{$id} not found.");
      }
  }

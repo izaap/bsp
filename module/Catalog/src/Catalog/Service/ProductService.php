@@ -32,4 +32,22 @@
          return $this->productMapper->find($id);
 
      }
+
+     /**
+      * {@inheritDoc}
+      */
+     public function saveOrderLinks( $data )
+     {
+         return $this->productMapper->saveOrderLinks( $data );
+
+     }
+
+     /**
+      * {@inheritDoc}
+      */
+     public function getOrderLink( $id )
+     {
+         return $this->productMapper->getOrderLink( $id );
+
+     }
  }

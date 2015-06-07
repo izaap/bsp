@@ -3,7 +3,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <?php echo $this->headTitle('ZF2 '. $this->translate('Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
+        <title>Clara Sunwoo (Official Site)</title>        
 
         <?php echo $this->headMeta()
             ->appendName('viewport', 'width=device-width, initial-scale=1.0')
@@ -13,43 +13,58 @@
         <!-- Le styles -->
         <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
                         ->prependStylesheet($this->basePath('css/style.css'))
-                        ->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
-                        ->prependStylesheet($this->basePath('css/bootstrap.min.css')) ?>
+                        ->prependStylesheet($this->basePath('css/jquery-ui.min.css')); ?>
 
         <!-- Scripts -->
         <?php echo $this->headScript()
-            ->prependFile($this->basePath('js/bootstrap.min.js'))
-            ->prependFile($this->basePath('js/jquery.min.js'))
-            ->prependFile($this->basePath('js/respond.min.js'), 'text/javascript', array('conditional' => 'lt IE 9',))
-            ->prependFile($this->basePath('js/html5shiv.js'),   'text/javascript', array('conditional' => 'lt IE 9',))
-        ; ?>
+            ->prependFile($this->basePath('js/custom.js'))
+            ->prependFile($this->basePath('js/jquery-ui.min.js'))
+            ->prependFile($this->basePath('js/jquery.min.js')); ?>
 
     </head>
     <body>
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+
+        <div class="wrapper">
             <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="<?php echo $this->url('home') ?>"><img src="<?php echo $this->basePath('img/zf2-logo.png') ?>" alt="Zend Framework 2"/>&nbsp;<?php echo $this->translate('Skeleton Application') ?></a>
+
+                <!--header start here-->
+                <header class="clearfix">
+                    <a href="#">
+                        <img src="<?php echo $this->basePath('img/logo.jpg');?>" width="93" height="89" alt="Clarasunwoo.com Logo">
+                    </a>
+                </header>
+                 <!--header end here-->  
+
+                <!--content start here-->
+                <div class="content_inner clearfix">
+
+                    <?php echo $this->content; ?>
+
                 </div>
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Home') ?></a></li>
-                    </ul>
-                </div><!--/.nav-collapse -->
+
+                 <!--footer start here-->
+                <footer class="clearfix">
+                    <div class="footbg"></div>
+                    <section>
+                        <h2>Clara S. inc</h2>
+                        <p>142 W.36th street, fl 14<br>
+                          New york, ny  10018</p>
+                        <p>P: 212-564-0736</p>
+                        <p>F: 212-564-1098</p>
+                        <p>E: <a href="mailto:iNFO@clarasunwoo.com">iNFO@clarasunwoo.com</a></p>
+                        <p>© 2015 CLARA S. INC</p>
+                    </section>
+                </footer>
+                <!--footer end here-->
+
             </div>
-        </nav>
-        <div class="container">
-            <?php echo $this->content; ?>
-            <hr>
-            <footer>
-                <p>&copy; 2005 - <?php echo date('Y') ?> by Zend Technologies Ltd. <?php echo $this->translate('All rights reserved.') ?></p>
-            </footer>
-        </div> <!-- /container -->
+        </div>        
+        
+
+        
+            
         <?php echo $this->inlineScript() ?>
+
     </body>
+
 </html>

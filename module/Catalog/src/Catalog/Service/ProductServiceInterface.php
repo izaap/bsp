@@ -9,4 +9,8 @@
     public function findAllProducts();
 
     public function findProduct($id);
+
+    public function saveOrderLinks( $data );
+
+    public function getOrderLink( $id );
  }

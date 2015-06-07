@@ -1,37 +1,293 @@
-body {
-    padding-top: 60px;
-    padding-bottom: 40px;
+@charset "utf-8";
+/* CSS Document */
+* {box-sizing:border-box; -moz-box-sizing:border-box; -webkit-box-sizing:border-box;}
+body{font-family: 'Open Sans', sans-serif; padding:0; margin:0; background:url(../img/bg1.jpg) repeat; color:#333333; font-size:16px;height: 100%;}
+h1,h2,h3,h4,h5,h6,ul,li,p{margin:0; padding:0;}
+ul,li{list-style:none;}
+
+@font-face {
+    font-family: 'fjalla_oneregular';
+    src: url('../fonts/fjallaone-regular-webfont.eot');
+    src: url('../fonts/fjallaone-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/fjallaone-regular-webfont.woff2') format('woff2'),
+         url('../fonts/fjallaone-regular-webfont.woff') format('woff'),
+         url('../fonts/fjallaone-regular-webfont.ttf') format('truetype'),
+         url('../fonts/fjallaone-regular-webfont.svg#fjalla_oneregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+.fjalla_oneregular{font-family: 'fjalla_oneregular';}
+
+@font-face {
+    font-family: 'dtlnobeltcondensedbold';
+    src: url('../fonts/dtlnotcb-webfont.eot');
+    src: url('../fonts/dtlnotcb-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/dtlnotcb-webfont.woff2') format('woff2'),
+         url('../fonts/dtlnotcb-webfont.woff') format('woff'),
+         url('../fonts/dtlnotcb-webfont.ttf') format('truetype'),
+         url('../fonts/dtlnotcb-webfont.svg#dtlnobeltcondensedbold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+.dtlnobeltcondensedbold{font-family: 'dtlnobeltcondensedbold';}
+
+@font-face {
+    font-family: 'dtlnobeltlightitalic';
+    src: url('../fonts/dtlnotli-webfont.eot');
+    src: url('../fonts/dtlnotli-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/dtlnotli-webfont.woff2') format('woff2'),
+         url('../fonts/dtlnotli-webfont.woff') format('woff'),
+         url('../fonts/dtlnotli-webfont.ttf') format('truetype'),
+         url('../fonts/dtlnotli-webfont.svg#dtlnobeltlightitalic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+.dtlnobeltlightitalic{font-family: 'dtlnobeltlightitalic';}
+
+@font-face {
+    font-family: 'dtlnobeltregular';
+    src: url('../fonts/dtlnobet-webfont.eot');
+    src: url('../fonts/dtlnobet-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/dtlnobet-webfont.woff2') format('woff2'),
+         url('../fonts/dtlnobet-webfont.woff') format('woff'),
+         url('../fonts/dtlnobet-webfont.ttf') format('truetype'),
+         url('../fonts/dtlnobet-webfont.svg#dtlnobeltregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+.dtlnobeltregular{font-family: 'dtlnobeltregular';}
+
+@font-face {
+    font-family: 'dtlnobeltcondensedregular';
+    src: url('../fonts/dtlnobtc-webfont.eot');
+    src: url('../fonts/dtlnobtc-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/dtlnobtc-webfont.woff2') format('woff2'),
+         url('../fonts/dtlnobtc-webfont.woff') format('woff'),
+         url('../fonts/dtlnobtc-webfont.ttf') format('truetype'),
+         url('../fonts/dtlnobtc-webfont.svg#dtlnobeltcondensedregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+.dtlnobeltcondensedregular{font-family: 'dtlnobeltcondensedregular';}
+
+@font-face {
+    font-family: 'dtlnobeltlightregular';
+    src: url('../fonts/dtlnobtl-webfont.eot');
+    src: url('../fonts/dtlnobtl-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/dtlnobtl-webfont.woff2') format('woff2'),
+         url('../fonts/dtlnobtl-webfont.woff') format('woff'),
+         url('../fonts/dtlnobtl-webfont.ttf') format('truetype'),
+         url('../fonts/dtlnobtl-webfont.svg#dtlnobeltlightregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+.dtlnobeltlightregular{font-family: 'dtlnobeltlightregular';}
+
+img{border:0;max-width: 100%; height: auto;}
+a{color:#333333; text-decoration:none;}
+a:hover{color:#F67780;}
+
+.full{width:100%!important;}
+.half{width:50%!important;}
+.wid_auto{width:auto!important;}
+.pull-left{float:left!important;}
+.pull-right{float:right!important;}
+.clearfix:before,.clearfix:after{content: " "; display: table; clear: both;}
+
+.mr5{margin-right:5px;}
+.ml5{margin-left:5px;}
+
+.mb5{margin-bottom:5px;}
+.mb15{margin-bottom:15px;}
+.mb40{margin-bottom:40px;}
+
+.mr0{margin-right:0px!important;}
+
+.mb0{margin-bottom:0!important;}
+
+.nowrap{white-space:nowrap;}
+
+.text-left{text-align:left!important;}
+.text-right{text-align:right!important;}
+.text-center{text-align:center!important;}
+
+.btn{padding:10px; background:#292929; color:#fff; cursor:pointer; font-weight:bold; border:0;}
+.btn-primary{background:#f76973;}
+.btn:hover{opacity:.9;}
+.btn-large{font-size:32px; font-weight:bold;}
+
+.container{width:1220px; margin:100px auto 0 auto; padding:20px; background:url(../img/bg2.jpg) repeat;}
+header{margin-bottom:8px;}
+.content_inner {min-height: 480px;}
+footer {margin-top: 20px;}
+footer section{float:right;}
+.footbg{background:#e9eaeb; background: rgba(0, 0, 0, 0.02); min-height: 50px;}
+.forminfo1 .l_sec, .forminfo1 .r_sec{width:49%;}
+.forminfo1 .l_sec{margin-right:.5%;}
+.forminfo1 .r_sec{margin-right:.5%;}
+.forminfo1 textarea, .forminfo1 input{border:1px solid #dedede; padding:10px; width:100%; margin-bottom:10px;}
+.forminfo1 textarea{min-height:90px;}
+.forminfo1 input {min-height: 41px;}
+.forminfo1 input[type=submit]{width:auto;}
+.forminfo1 {margin-bottom: 25px;}
+
+body .forminfo1 .startdate, body .forminfo1 .enddate{width:49%;}
+.startdate{margin-right:.5%;}
+.enddate{margin-left:.5%;}
+
+.checkboxlist{}
+.checkboxlist ul{float:left; width:32.5%; margin-left:.25%; margin-right:.25%; margin-bottom: 25px; list-style:none;}
+.checkboxlist li label{display:block; cursor:pointer;}
+.checkboxlist li label:hover{color:#F6767F;}
+.checkboxlist li{font-size:27px; font-weight: 600;}
+.checkboxlist li b{font-size:38px; font-weight:bold;}
+.checkboxlist li input[type=checkbox]{border:1px solid #878787;vertical-align: middle;}
+
+.executive_ara{position:relative;}
+.stylefor{width:380px; min-height:358px; background:#fff; border:10px solid #231f20;}
+.stylefor {text-align: center;}
+.stylefor h2 {font-size: 55px; margin-top: 55px;}
+.stylefor h3 {font-size: 48px; margin-top: 28px; color:#b2b2b2; font-family: 'dtlnobeltlightregular';}
+
+.executive_info{position:absolute; right:0; bottom:0; text-align:right}
+.executive_info img{border:5px solid #fff; box-sizing: unset; -moz-box-sizing: unset; -webkit-box-sizing: unset;}
+.executive_info h2{font-size:/*43px;*/28px;}
+.executive_info h2 span{font-size:22px;}
+
+.lsec {float: left; width: 36%;font-family: 'dtlnobeltregular';font-size: 17px;margin-right: 2%;}
+.rsec{font-family: 'dtlnobeltlightregular'; font-size:19px; line-height: 21px; width: 62%; float:left;}
+.row{border: 1px solid #dedede;
+    margin-bottom: 10px;
+    padding: 10px;
+    width: 100%; min-height: 41px;}
+.half .row {width: 99%;}
+
+.total{font-size: 38px;width: 378px; font-weight: bold;margin-top: 15px;}
+
+.suborder .btn-large{margin:0;}
+
+.productlist{margin-left: -7px;}
+.productlist .item{float:left; width:380px;margin-left: 8px;
+    margin-right: 7px;}
+.productlist .colorswaprow{width:314px;}
+.productlist .video{width:66px; text-align:center;}
+.productlist .colorswaprow li {border: 3px solid #fff;float: left; margin-right:8px;}
+.productlist .colorswaprow li a{float:left; width:43px; height:43px; background:#3e3e3e; border:1px solid #b4b4b4;}
+.productlist .colorswaprow li.black a{background:#3e3e3e;}
+.productlist .colorswaprow li.peri a{background:#A6B1E7;}
+.productlist .colorswaprow li.red a{background:#ff1b2b;}
+.productlist .colorswaprow li.brown a{background:#7c4435;}
+.productlist .colorswaprow li.charcoal a{background:#606060;}
+.productlist .colorswaprow li.lime a{background:#3e3e3e;}
+.productlist .colorswaprow li.orange a{background:#3e3e3e;}
+.productlist .colorswaprow li.purple a{background:#3e3e3e;}
+.productlist .colorswaprow li.cobalt a{background:#3e3e3e;}
+.productlist .colorswaprow li.ivory a{background:#3e3e3e;}
+.productlist .colorswaprow li.white a{background:#3e3e3e;}
+.productlist .colorswaprow li.skyblue a{background:#69c6f7;}
+.productlist .colorswaprow li.blue a{background:#0a60ff;}
+
+.productlist h1, .productlist h1 a{font-family: 'fjalla_oneregular'; font-size:36px; color:#494949; display:block;}
+.productlist .item{margin-bottom:15px; position:relative;}
+.productlist .item:hover h1 a{color:#f67780;}
+.productlist .item:hover .prothumb{opacity:.9;}
+.productlist p{font-size:12px; text-transform:uppercase; color:#757575; font-weight:500; padding:0 50px;}
+
+.productlist .sizes ul{font-family: 'fjalla_oneregular';margin-bottom: 8px; float:left; width:100%;}
+.productlist .sizes li {float: left; margin-right:8px; width: 35px; text-align:center;}
+.productlist .sizes li input {width:35px; height:35px; border:1px solid #2a2a2a; text-align:center; font-size:17px;font-family: 'fjalla_oneregular'; background: transparent none repeat scroll 0 0;}
+.productlist .sizes li:first-child {padding-top: 7px; font-size:17px; text-transform:uppercase; width:75px; text-align:right;}
+.productlist .sizes li .soldout{font-size:10px;}
+.productlist .sizes .subtot{}
+.productlist .sizes .subtot li{width:auto;}
+.productlist .sizes .subtot li:first-child, .productlist .sizes .subtot li:last-child{padding-top: 7px; }
+.productlist .sizes, .productlist .sizes .subtot {display: inline-block; margin: 7px auto;}
+.productlist .sizes .subtot {margin: 0 auto !important; float:none; width:auto!important;}
+footer h2{font-size:18px; color:#494949; font-weight:normal; text-transform:uppercase; margin-top:30px;}
+footer p {border-bottom: 1px dotted #c2c2c2; padding-top: 10px; font-size:13px; color:#616161;line-height: 28px;}
+footer a{ color:#616161;}
+
+.closeouts{}
+.closeouts h2{background:url(../img/arrowdown.png) no-repeat center bottom; padding-bottom:40px; margin-bottom:25px; text-align:center; font-size:42px; letter-spacing:5px;}
+
+.closeouts .productlist .item {margin-left: 4px; margin-right: 3px; width: 176px;vertical-align: top; float:none; display:inline-block;}
+.closeouts .productlist {text-align: center;}
+.closeouts .productlist .video{width:31px;}
+.closeouts .productlist .colorswaprow {width: 145px;}
+.closeouts .productlist .colorswaprow li{margin-right: 3px; border:1px;}
+.closeouts .productlist .colorswaprow li a{height: 19px; width: 19px;}
+.closeouts .productlist h1, .closeouts .productlist h1 a{font-size:16px;}
+.closeouts .productlist p{font-size:6px; padding:0 20px;}
+.closeouts .productlist .sizes li input{width: 15px; height: 15px; font-size: 7px;float: left;}
+.closeouts .productlist .sizes li {width: 15px; margin-right: 2px; font-size: 8px;}
+.closeouts .productlist .sizes li:first-child {font-size: 7px; padding-top: 6px;width: 30px;}
+.closeouts .productlist .sizes li input.soldout {font-size: 4px;line-height: 5px;}
+.closeouts .productlist small{font-size:7px;}
+.closeouts .productlist .sizes ul{margin-bottom: 2px;}
+.closeouts .productlist .sizes .subtot li input {float: none;}
+.closeouts .productlist .sizes li:first-child {font-size: 7px;padding-top: 6px; width: 30px;}
+.closeouts .productlist .sizes .subtot li:first-child, .closeouts .productlist .sizes .subtot li:last-child{padding-top: 3px;}
+.closeouts .productlist .sizes .subtot {white-space: nowrap;}
+.submitorder.row{padding:0;}
+.submitorder.row .total span {display: inline-block; font-size: 23px; padding-top: 10px; vertical-align: top;font-family: 'dtlnobeltregular'; font-weight: normal;}
+.submitorder .lsec {white-space: nowrap; padding-left:10px; padding-right:10px;}
+.submitorder .lsec .total{width:auto; padding-left:10px; margin-top: 20px;}
+
+body.step3, .step3 .container{background-image:none; background-color:#fff;}
+.step3 .container{ margin: 50px auto 0;}
+.step3 .logo {float: left;}
+.head_info {display: inline-block; width:49%;}
+.step3 .head_info > p{margin-left:30px;font-size: 21px;}
+.pickedby {text-align:right; width:50%; display: inline-block; vertical-align: bottom;
+}
+.pickedby h2 {font-size:50px; color:#757575;}
+.pickedby h2 span{font-weight:normal; font-size: 56px;}
+.step3 .total {font-size: 42px;}
+.step3 .lsec > small { display: inline-block;line-height: 98px;  vertical-align: top;}
+.step3 .lsec .total {display: inline-block; font-size: 38px; font-weight: bold; margin-top: 18px;}
+
+.cartview th{background:#000; color:#fff;font-family: 'dtlnobeltregular'; font-weight: normal; text-transform:uppercase;}
+.cartview th{padding:18px; font-size:18px;}
+.cartview td{padding:2px 18px 0 18px; border-bottom:1px solid #e1e0e0;}
+.cartview .desc{color: #757575;font-size: 12px; font-weight: 500; padding: 0 50px; text-transform: uppercase;}
+.style{color: #494949; font-family: "fjalla_oneregular";
+    font-size: 36px;}
+.cartview .productlist .sizes ul{width:380px;}
+th.color{padding-left:28px;}
+
+.brown_txt{color:#934200;}
+.cartview .unitcost.productlist .sizes li{font-size: 22px;}
+.cartview .unitcost.productlist .sizes li input{font-size: 22px; height: 46px; width: 48px;}
+.thankyousec{background:#f7f7f7; padding:5px 25px;}
+.thankyousec p{padding:0; border:0; line-height:normal;}
+.thankyousec h3{font-size:20px; color:#757575; font-weight:normal;}
+.thankyousec h2{font-size:29px; letter-spacing:1px; font-weight:normal; font-family: "dtlnobeltlightregular";}
+.thankyousec small{font-family: "dtlnobeltlightregular";color:#757575; font-size:14px;}
+
+#videoModal {
+    background: white none repeat scroll 0 0;
+    display: none;
+    height: 300px;
+    position: absolute;
+    top: 150px;
+    width: 400px;
+    z-index: 20000000;
 }
 
-.zf-green {
-    color: #68b604;
+.l_sec.pull-left > span {
+    float: left;
+    width: 49%;
 }
-
-.btn-success {
-  background-color: #57a900;
-  background-image: -moz-linear-gradient(top, #70d900, #57a900);
-  background-image: -ms-linear-gradient(top, #70d900, #57a900);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#70d900), to(#57a900));
-  background-image: -webkit-linear-gradient(top, #70d900, #57a900);
-  background-image: -o-linear-gradient(top, #70d900, #57a900);
-  background-image: linear-gradient(top, #70d900, #57a900);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#70d900', endColorstr='#57a900', GradientType=0);
+body .forminfo1 .startdate, body .forminfo1 .enddate {
+    width: 100%;
 }
-
-.btn-success:hover,
-.btn-success:active,
-.btn-success.active,
-.btn-success.disabled,
-.btn-success[disabled] {
-  background-color: #57a900;
-}
-
-.btn-success:active, .btn-success.active {
-  background-color: #57a900;
-}
-
-div.container a.brand {
-    background: url("../img/zf2-logo.png") no-repeat scroll 0 10px transparent;
-    margin-left: 0;
-    padding: 8px 20px 12px 40px;
+.error {
+    color: red;
+    font-size: 13px;
 }

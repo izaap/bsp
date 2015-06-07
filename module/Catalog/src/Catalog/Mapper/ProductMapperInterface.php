@@ -10,4 +10,9 @@
 
      
      public function findAll();
+
+     public function saveOrderLinks( $data );
+
+     public function getOrderLink( $id );
+
  }
