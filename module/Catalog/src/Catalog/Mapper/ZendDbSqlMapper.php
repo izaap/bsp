@@ -113,4 +113,148 @@
 
            throw new \InvalidArgumentException("Product with given ID:{$id} not found.");
      }
+
+
+     /**
+      * @return array|PostInterface[]
+      */
+     public function getOptions()
+     {
+         $sql    = new Sql($this->dbAdapter);
+         $select = $sql->select();
+
+         $select->from('attribute_options');
+         $select->join('attribute', 'attribute_options.attribute_id = attribute.id', array('name'));
+
+         $stmt   = $sql->prepareStatementForSqlObject($select);
+         $result = $stmt->execute();
+
+         if ($result instanceof ResultInterface && $result->isQueryResult()) 
+         {
+             return $result;
+         }
+
+         return array();
+
+     }
+
+     /**
+      * @return array|PostInterface[]
+      */
+     public function getCategories()
+     {
+         $sql    = new Sql($this->dbAdapter);
+         $select = $sql->select();
+
+         $select->from('category');
+
+         $stmt   = $sql->prepareStatementForSqlObject($select);
+         $result = $stmt->execute();
+
+         if ($result instanceof ResultInterface && $result->isQueryResult()) 
+         {
+             return $result;
+         }
+
+         return array();
+
+     }
+
+     public function saveProducts( $data = array() )
+     {
+
+        $product = $this->getProducts( array('sku = ?'=> $data['sku']) )->current();
+
+        if( $product === FALSE || !count($product) )
+        {
+          $action = new Insert('product');
+          $action->values($data);
+        }
+        else
+        {
+          $action = new Update('product');
+          $action->set($data);
+          $action->where(array('id = ?' => $product['id']));
+        }
+        
+
+        $sql    = new Sql($this->dbAdapter);
+        $stmt = $sql->prepareStatementForSqlObject($action);
+
+        $result = $stmt->execute();
+
+        if ($result instanceof ResultInterface) 
+        {
+          if ($newId = $result->getGeneratedValue()) 
+          {
+            return $newId;
+          }
+
+          return $product['id'];
+        }
+
+        return false;
+     }
+
+
+     /**
+      * @param int|string $id
+      *
+      * @return PostInterface
+      * @throws \InvalidArgumentException
+      */
+     public function getProducts( $where )
+     {
+           $sql    = new Sql($this->dbAdapter);
+           $select = $sql->select('product');
+           $select->where( $where );
+
+           $stmt   = $sql->prepareStatementForSqlObject($select);
+           $result = $stmt->execute();
+
+           if ($result instanceof ResultInterface && $result->isQueryResult() ) 
+           {
+               return $result;
+           }
+
+           return FALSE;
+     }
+
+
+     /**
+      * @param int|string $id
+      *
+      * @return PostInterface
+      * @throws \InvalidArgumentException
+      */
+     public function getParentId( $where )
+     {
+           $sql    = new Sql($this->dbAdapter);
+           $select = $sql->select('product');
+           $select->where( $where );
+
+           $stmt   = $sql->prepareStatementForSqlObject($select);
+           $result = $stmt->execute();
+
+           if ($result instanceof ResultInterface && $result->isQueryResult() ) 
+           {
+               return $result;
+           }
+
+           return FALSE;
+     }
+
+     public function disableProducts( $parent_id = 0, $ids = array() )
+     {
+
+        if( !count($ids) || !$parent_id )
+          return false;
+
+        $ids = implode(',', $ids);
+        $sql = "UPDATE  product set qty='0' where parent_id='$parent_id' and id NOT IN ($ids)";
+        $statement = $this->dbAdapter->query($sql); 
+
+        return $statement->execute();
+     }
+
  }

@@ -291,3 +291,11 @@ body .forminfo1 .startdate, body .forminfo1 .enddate {
     color: red;
     font-size: 13px;
 }
+
+.success {
+    color: green;
+    font-size: 13px;
+}
+
+.upload-div{text-align:center;}
+.upload-div input{width: inherit;}

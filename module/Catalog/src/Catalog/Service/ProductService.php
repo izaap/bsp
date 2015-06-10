@@ -50,4 +50,35 @@
          return $this->productMapper->getOrderLink( $id );
 
      }
+
+     public function getOptions( )
+     {
+         return $this->productMapper->getOptions( );
+
+     }
+
+     public function getCategories( )
+     {
+         return $this->productMapper->getCategories( );
+
+     }
+
+     public function saveProducts( $data )
+     {
+         return $this->productMapper->saveProducts( $data );
+
+     }
+
+     public function getProducts( $where )
+     {
+         return $this->productMapper->getProducts( $where );
+
+     }
+
+     public function disableProducts( $parent_id, $ids )
+     {
+         return $this->productMapper->disableProducts( $parent_id, $ids );
+
+     }
+
  }

@@ -7,6 +7,7 @@
 	use Zend\Form\Factory;
 	use Zend\Validator;
 	use Zend\Mvc\Router\RouteMatch;
+	use Catalog\Form\UploadForm;
 
 	class CatalogController extends AbstractActionController
 	{
@@ -190,51 +191,54 @@
 
 		public function uploadAction()
 		{
-			$factory = new Factory();
+			
+			$errors = array();
+			$success_uploads = 0;
 
-			$form    = $factory->createForm(array(
-					    'hydrator' => 'Zend\Stdlib\Hydrator\ArraySerializable',
-					    'elements' => array(
-					        array(
-					            'spec' => array( 'name' => 'file', 'attributes' => array('placeholder' => 'UPLOAD FILE:'), 'type'  => 'file' )
-					        )
-					        
-					    ),
+			$form = new UploadForm('upload-form');
+			$request = $this->getRequest();
+		    if ($request->isPost()) 
+		    {
+		        // Make certain to merge the files info!
+		        $post = array_merge_recursive(
+		            $request->getPost()->toArray(),
+		            $request->getFiles()->toArray()
+		        );
 
-					    'input_filter' => array(
-					    		'file' => array(
-					    			'required' => false,
-					    			'validators' => array(
-					    				array('name' => 'NotEmpty'),
-					    				)
-					    			)
+		        $form->setData($post);
+		        if ($form->isValid()) 
+		        {
+		            $data = $form->getData();
+		            
+		            $result = $this->productService->getOptions( );
+					$options = array();
+					foreach ($result as $row) 
+					{
+						$tmp = strtolower($row['value']);
+						$options[$row['attribute_id']][$tmp] = $row['id']; 
+					}
 
-					    	)
-					 )
-					);
+					$result = $this->productService->getCategories( );
+					$cats_id = array();
+					$cats_name = array();
+					foreach ($result as $row) 
+					{
+						$tmp = strtolower($row['name']);
+						$cats_name[$row['id']] = $row['name']; 
+						$cats_id[$tmp] = $row['id'];
+					}
 
-			if(isset($_FILES["file"]))
-			{
+					$tmpName = $data['image-file']['tmp_name'];
+		            if(($handle = fopen($tmpName, 'r')) !== FALSE) 
+		            {
+			            // necessary if a large csv file
+			        	//echo "<pre>";
+			        	$row=1;
+				        while(($data = fgetcsv($handle, 1000, ',')) !== FALSE) 
+				        {
 
-				if($_FILES['file']['error'] == 0){
-
-				    $name = $_FILES['file']['name'];
-				    echo $name;
-				    $ext = explode(".", $_FILES['file']['name']);
-				    $ext = strtolower(end($ext));
-				    $type = $_FILES['file']['type'];
-				    $tmpName = $_FILES['file']['tmp_name'];
-
-				    
-				    // check the file is a csv
-				    if($ext === 'csv'){
-				        if(($handle = fopen($tmpName, 'r')) !== FALSE) {
-				            // necessary if a large csv file
-				        	echo "<pre>";
-				        	$row=1;
-					        while(($data = fgetcsv($handle, 1000, ',')) !== FALSE) {
-
-					        if($row==1){
+					        if($row==1)
+					        {
 
 				               $field_errors='';
 
@@ -248,27 +252,117 @@
 				               	   break;
 				               }
 				               
-				           	}else{
+				           	}
+				           	else
+				           	{
 
 					           	$data = array_combine($this->required_fields, array_values($data));
-					            print_r($data);
+					            
+					            $colors = explode(';', $data['color']);
+					            $sizes 	= explode(';', $data['size']);
+
+					            $category_name = strtolower(trim($data['category']));
+
+				            	if( array_key_exists($category_name, $cats_id) === FALSE )
+				            	{
+				            		$errors[] = "<b>{$data['style']}:</b> The Category \"$category_name\" is missing in Category list.";
+				            		continue;
+				            	}
+
+				            	$cat_id = $cats_id[$category_name];
+
+				            	//get parent product if exists
+				            	$pp = $this->productService->getProducts( array('sku=?' => $data['style']) )->current();
+				            	$parent_id = 0;
+				            	if( $pp === false || !count($pp) )
+				            	{
+				            		$p_insert = array();
+				            		$p_insert['type'] = 'configurable';
+					            	$p_insert['parent_id'] = 0;
+					            	$p_insert['combination'] = "";
+					            	$p_insert['sku'] = $data['style'];
+					            	$p_insert['category_id'] = $cat_id;
+					            	$p_insert['description'] = $data['description'];
+					            	$p_insert['min_qty'] = $data['minimum'];
+					            	$p_insert['price'] = (float)$data['price'];
+					            	$p_insert['qty'] = 1000;
+					            	$p_insert['clearance'] = $data['clearance'];
+					            	$p_insert['essential'] = $data['essential'];
+
+					            	$parent_id = $this->productService->saveProducts( $p_insert );
+
+				            	}
+				            	else
+				            	{
+				            		$parent_id = $pp['id'];
+				            	}
+
+				            	$child_ids = array();
+					            foreach ($colors as $color) 
+					            {
+					            	$color = strtolower(trim($color));
+					            	if( array_key_exists($color, $options[1]) === FALSE )
+					            	{
+					            		$errors[] = "<b>{$data['style']}:</b> The Color \"$color\" is missing in attribute list.";
+					            		continue;
+					            	}
+
+					            	
+
+					            	foreach ($sizes as $size) 
+						            {
+						            	$size = strtolower(trim($size));
+						            	
+						            	if( array_key_exists($size, $options[2]) === FALSE )
+						            	{
+						            		$errors[] = "<b>{$data['style']}:</b> The Size \"$size\" is missing in attribute list.";
+						            		continue;
+						            	}
+
+						            	$color_id = $options[1][$color];
+						            	$size_id = $options[2][$size];						            	
+
+						            	$insert  = array();
+						            	$insert['type'] = 'simple';
+						            	$insert['parent_id'] = $parent_id;
+						            	$insert['combination'] = "$color_id,$size_id";
+						            	$insert['sku'] = "{$data['style']}-$color-$size";
+						            	$insert['category_id'] = $cat_id;
+						            	$insert['description'] = $data['description'];
+						            	$insert['min_qty'] = $data['minimum'];
+						            	$insert['price'] = (float)$data['price'];
+						            	$insert['qty'] = 1000;
+						            	$insert['clearance'] = $data['clearance'];
+						            	$insert['essential'] = $data['essential'];
+
+						            	$pid = $this->productService->saveProducts( $insert );
+
+						            	$child_ids[] = $pid;
+
+						            	$success_uploads++;
+						            }
+					            }
+
+
+					            //update missing child's qty as 0 ( oos )
+					            $this->productService->disableProducts( $parent_id, $child_ids );
 				        	}
 
 				            $row++;
-				            
-				            }
-				            fclose($handle);
-				        }
-				    }
-				}
-				exit;
-			}	
+			            
+			            }
 
+			            //echo '<pre>';
+					    //print_r($errors);die;
 
+			            fclose($handle);
+			        }
+		            
+		        }
+		    }
 
-			return new ViewModel(array(
-             'data' => $this->productService->findAllProducts(),
-             'form' => $form
-         	));
+		    return array('form' => $form, 'errors' => $errors, 'success_uploads' => $success_uploads);
+
+			
 		}
 	}
