@@ -133,15 +133,35 @@
 			
 
 			$order_links_id = '';
+			$products_valid = '';
 			if( count($_POST) )
 			{
 				$form->setData($_POST);
 				if ($form->isValid()) 
 				{
-			    	$validatedData = $form->getData();
-			    	//echo '<pre>';print_r($validatedData);die;
-			    	$order_links_id = $this->productService->saveOrderLinks( array('order_data' => json_encode($validatedData)) );
+					if(isset($_POST['categories']) || isset($_POST['products']) || isset($_POST['essential']) || isset($_POST['clearance']))
+					{
+				    	$validatedData = $form->getData();
 
+				    	if(isset($_POST['categories']))
+				    		$validatedData['categories'] = $_POST['categories'];
+
+				    	if(isset($_POST['products']))
+				    		$validatedData['products'] = $_POST['products'];	
+
+				    	if(isset($_POST['essential']))
+				    		$validatedData['essential'] = $_POST['essential'];
+
+				    	if(isset($_POST['clearance']))
+				    		$validatedData['clearance'] = $_POST['clearance'];				
+
+				    	//echo '<pre>';print_r($validatedData);die;
+				    	$order_links_id = $this->productService->saveOrderLinks( array('order_data' => json_encode($validatedData)) );
+				    }
+				    else
+				    {
+				    	$products_valid = "Please Select atleast one product or category";
+				    }
 				} 
 				else 
 				{
@@ -150,9 +170,21 @@
 
 			}
 			
+			$cat_products=array();
+			$categories = array();
+			$prods = $this->productService->getProductsByCategory();
+			foreach ($prods as $row) 
+			{
+				$cat_products[$row['category_id']][]=$row;
+				$categories[$row['category_id']] = $row['category_name'];
+			}
+
 			return new ViewModel(array(
              'data' => $this->productService->findAllProducts(),
              'form' => $form,
+             'products' => $cat_products,
+             'categories' => $categories,
+             'product_validate' => $products_valid,
              'order_links_id' => $order_links_id
          	));
 

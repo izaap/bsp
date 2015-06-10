@@ -80,5 +80,11 @@
          return $this->productMapper->disableProducts( $parent_id, $ids );
 
      }
+  
+     public function getProductsByCategory( )
+     {
+         return $this->productMapper->getProductsByCategory( );
+
+     }    
 
  }

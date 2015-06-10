@@ -257,4 +257,23 @@
         return $statement->execute();
      }
 
+     public function getProductsByCategory()
+     {
+         $sql    = new Sql($this->dbAdapter);
+         $select = $sql->select();
+
+         $select->from('product','*');
+         $select->join('category', 'product.category_id = category.id', array('category_name'=>'name'));
+
+         $stmt   = $sql->prepareStatementForSqlObject($select);
+         $result = $stmt->execute();
+
+         if ($result instanceof ResultInterface && $result->isQueryResult()) {
+             return $result;
+         }
+
+         return array();
+
+     }  
+
  }

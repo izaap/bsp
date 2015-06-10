@@ -25,4 +25,6 @@
 
      public function disableProducts( $parent_id, $ids );
 
+     public function getProductsByCategory( ); 
+
  }
