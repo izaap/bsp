@@ -14,15 +14,19 @@
 		protected $productService;
 
 		protected $required_fields = array('style','description','category','color','size','price','minimum','clearance','essential');
+		protected $server_url;
 
 		public function __construct(ProductServiceInterface $productService)
 		{
 			$this->productService = $productService;
+			
 
-		}
+		}	
 
 		public function indexAction()
 		{
+			$this->server_url = $this->getRequest()->getUri()->getScheme() . '://' . $this->getRequest()->getUri()->getHost();
+			
 			$factory = new Factory();
 
 			$form    = $factory->createForm(array(
@@ -170,11 +174,40 @@
 
 			}
 			
+			$result = $this->productService->getOptions( );
+			$options = array();
+			foreach ($result as $row) 
+			{
+				$tmp = strtolower($row['value']);
+				$options[$row['attribute_id']][$tmp] = $row['id']; 
+			}
+
+			$colors = array_values($options[1]);
+
+			//echo '<pre>';print_r($options[1]);
+
 			$cat_products=array();
 			$categories = array();
 			$prods = $this->productService->getProductsByCategory();
+			$pc = array();
 			foreach ($prods as $row) 
 			{
+				if( !$row['parent_id'] )
+					continue;
+
+				$combinations = explode(',', $row['combination']);
+
+				if( isset($pc[$row['parent_id']]) && in_array($combinations[0], $pc[$row['parent_id']]))
+					continue;
+
+				$pc[$row['parent_id']][] = $combinations[0];
+
+
+				$tmp = explode('-', $row['sku']);
+				array_pop( $tmp ); 
+				
+				$row['sku'] = implode('-', $tmp);
+
 				$cat_products[$row['category_id']][]=$row;
 				$categories[$row['category_id']] = $row['category_name'];
 			}
@@ -185,7 +218,8 @@
              'products' => $cat_products,
              'categories' => $categories,
              'product_validate' => $products_valid,
-             'order_links_id' => $order_links_id
+             'order_links_id' => $order_links_id,
+             'server_url' => $this->server_url
          	));
 
 		}

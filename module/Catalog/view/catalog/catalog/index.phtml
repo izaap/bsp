@@ -1,11 +1,14 @@
 
+
+
 <?php	if( $this->order_links_id ):
 	$url = $this->url('order', array('id' => $order_links_id), array('force_canonical' => false)); 
 	$message = 'Your Order linki is http://bsp.local'.$url;
+
 ?>
-	<script>
-		alert('<?php echo $message;?>');
-	</script>
+	<section class="forminfo1 full clearfix success text-center">
+  		<h2>Your order link is : <a href="<?php echo $this->server_url.$url;?>"><?php echo $this->server_url.$url;?></a></h2>
+	</section>
 <?php endif; ?>	
 	
 <form  method="post"  >

@@ -263,7 +263,8 @@
          $select = $sql->select();
 
          $select->from('product','*');
-         $select->join('category', 'product.category_id = category.id', array('category_name'=>'name'));
+         $select->join('category', "product.category_id = category.id ", array('category_name'=>'name'));
+         $select->where( array('product.qty > ?' => 0) );
 
          $stmt   = $sql->prepareStatementForSqlObject($select);
          $result = $stmt->execute();
