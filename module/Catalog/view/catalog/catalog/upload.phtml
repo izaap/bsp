@@ -1,0 +1,30 @@
+<section class="forminfo1 full clearfix">
+
+<?php //echo $url = $this->url('order', array('id' => 999), array('force_canonical' => false)); ?>
+
+	<form  method="post"  enctype='multipart/form-data'>
+
+	<?php
+
+	/*$form = $this->form;
+	$name = $form->get('name');
+	 echo $this->formInput($name);
+	 echo $this->formElementErrors($name);*/
+?>
+
+		<div class="l_sec pull-left">
+
+			<label for="textfield"></label>
+			<?php echo $this->formInput( $this->form->get('file') ); ?>
+			<?php echo $this->formElementErrors()
+						->setMessageOpenFormat('<span class="error">')
+						->setMessageCloseString('</span>')
+						->render($form->get('file')); 
+			?>
+
+			<button type="submit" class="btn btn-primary ">Submit</button>
+
+		</div>
+		
+	</form>
+</section>

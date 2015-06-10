@@ -12,9 +12,12 @@
 	{
 		protected $productService;
 
+		protected $required_fields = array('style','description','category','color','size','price','minimum','clearance','essential');
+
 		public function __construct(ProductServiceInterface $productService)
 		{
 			$this->productService = $productService;
+
 		}
 
 		public function indexAction()
@@ -183,5 +186,89 @@
 
 		public function deleteAction()
 		{
+		}
+
+		public function uploadAction()
+		{
+			$factory = new Factory();
+
+			$form    = $factory->createForm(array(
+					    'hydrator' => 'Zend\Stdlib\Hydrator\ArraySerializable',
+					    'elements' => array(
+					        array(
+					            'spec' => array( 'name' => 'file', 'attributes' => array('placeholder' => 'UPLOAD FILE:'), 'type'  => 'file' )
+					        )
+					        
+					    ),
+
+					    'input_filter' => array(
+					    		'file' => array(
+					    			'required' => false,
+					    			'validators' => array(
+					    				array('name' => 'NotEmpty'),
+					    				)
+					    			)
+
+					    	)
+					 )
+					);
+
+			if(isset($_FILES["file"]))
+			{
+
+				if($_FILES['file']['error'] == 0){
+
+				    $name = $_FILES['file']['name'];
+				    echo $name;
+				    $ext = explode(".", $_FILES['file']['name']);
+				    $ext = strtolower(end($ext));
+				    $type = $_FILES['file']['type'];
+				    $tmpName = $_FILES['file']['tmp_name'];
+
+				    
+				    // check the file is a csv
+				    if($ext === 'csv'){
+				        if(($handle = fopen($tmpName, 'r')) !== FALSE) {
+				            // necessary if a large csv file
+				        	echo "<pre>";
+				        	$row=1;
+					        while(($data = fgetcsv($handle, 1000, ',')) !== FALSE) {
+
+					        if($row==1){
+
+				               $field_errors='';
+
+				               foreach($data as $key => $col){
+
+				               		if(!in_array(strtolower($col),$this->required_fields))
+				               			$field_errors .= "The ".$col." field is missing<br/>";
+				               }
+
+				               if(!empty($field_errors)){
+				               	   break;
+				               }
+				               
+				           	}else{
+
+					           	$data = array_combine($this->required_fields, array_values($data));
+					            print_r($data);
+				        	}
+
+				            $row++;
+				            
+				            }
+				            fclose($handle);
+				        }
+				    }
+				}
+				exit;
+			}	
+
+
+
+			return new ViewModel(array(
+             'data' => $this->productService->findAllProducts(),
+             'form' => $form
+         	));
 		}
 	}

@@ -9,7 +9,7 @@
     'db' => array(
          'driver'         => 'Pdo',
          'username'       => 'root',  //edit this
-         'password'       => '',  //edit this
+         'password'       => 'ram123',  //edit this
          'dsn'            => 'mysql:dbname=bsp;host=localhost',
          'driver_options' => array(
              \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
@@ -63,6 +63,18 @@
                      'defaults' => array(
                          'controller' => 'Catalog\Controller\Catalog',
                          'action'     => 'order',
+                     ),
+                 ),
+             ),
+
+             'upload' => array(
+                 'type'    => 'segment',
+                 'options' => array(
+                     'route'    => '/inventory_upload',
+                     'constraints' => array(  ),
+                     'defaults' => array(
+                         'controller' => 'Catalog\Controller\Catalog',
+                         'action'     => 'upload',
                      ),
                  ),
              ),
