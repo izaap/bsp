@@ -241,8 +241,8 @@
               $select->where( $data );
            }           
 
-           $qry = $sql->getSqlStringForSqlObject($select);
-           echo $qry;die;
+           //$qry = $sql->getSqlStringForSqlObject($select);
+           //echo $qry;die;
 
            $stmt   = $sql->prepareStatementForSqlObject($select);
            

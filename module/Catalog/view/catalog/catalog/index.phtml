@@ -84,7 +84,7 @@
 
 <div class="checkboxlist clearfix">
 
-<div class="error"><?php echo $product_validate;?></div>
+<div class="error text-center mb15"><h2><?php echo $product_validate;?></h2></div>
 
 <?php if(is_array($this->products) && !empty($this->products)):?>
 
@@ -116,7 +116,7 @@
 		</ul>		
 
     <?php else: ?>
-    	<div > No Records Found</div>
+    	<div class="text-center"> <h1>No Products Found </h1></div>
  	<?php endif;?>
 
 </div>
