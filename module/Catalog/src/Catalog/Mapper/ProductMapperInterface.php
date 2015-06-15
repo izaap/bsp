@@ -33,4 +33,6 @@
 
      public function getOrder( $id );
 
+     public function login($data); 
+
  }

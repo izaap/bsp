@@ -79,6 +79,30 @@
                  ),
              ),
 
+              'login' => array(
+                 'type'    => 'segment',
+                 'options' => array(
+                     'route'    => '/login',
+                     'constraints' => array(  ),
+                     'defaults' => array(
+                         'controller' => 'Catalog\Controller\Catalog',
+                         'action'     => 'login',
+                     ),
+                 ),
+             ),
+
+               'logout' => array(
+                 'type'    => 'segment',
+                 'options' => array(
+                     'route'    => '/logout',
+                     'constraints' => array(  ),
+                     'defaults' => array(
+                         'controller' => 'Catalog\Controller\Catalog',
+                         'action'     => 'logout',
+                     ),
+                 ),
+             ),
+
          ),
      ),
 

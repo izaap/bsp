@@ -388,7 +388,13 @@
 
 		public function uploadAction()
 		{
-			
+			$session = new Container('user');
+		    $logedin = ($session->offsetExists('userdata'))?TRUE:FALSE;
+
+		    if(!$logedin){
+		    	return $this->redirect()->toRoute('login');
+		    }
+
 			$errors = array();
 			$success_uploads = 0;
 
@@ -558,7 +564,7 @@
 		        }
 		    }
 
-		    return array('form' => $form, 'errors' => $errors, 'success_uploads' => $success_uploads);
+		    return array('form' => $form, 'errors' => $errors, 'success_uploads' => $success_uploads,'logedin'=>$logedin);
 
 			
 		}
@@ -676,7 +682,72 @@
 			return $form;
 		}
 
+		public function loginAction(){
 
+			$factory = new Factory();
+
+			$form    = $factory->createForm(array(
+					    'hydrator' => 'Zend\Stdlib\Hydrator\ArraySerializable',
+					    'elements' => array(
+					        array(
+					            'spec' => array( 'name' => 'username', 'attributes' => array('placeholder' => 'USER NAME:'), 'type'  => 'Text' )
+					        ),
+					        array(
+					            'spec' => array( 'name' => 'password', 'attributes' => array('placeholder' => 'PASSWORD:'), 'type'  => 'Password' )
+					        ),
+					      
+					    ),
+
+					    'input_filter' => array(
+					    		'username' => array(
+					    			'required' => true,
+					    			'validators' => array(
+					    				array('name' => 'NotEmpty'),
+					    				)
+					    			),
+					    		'password' => array(
+					    			'required' => true,
+					    			'validators' => array(
+					    				array('name' => 'NotEmpty')
+					    				)
+					    			),
+					    	)
+					 	)
+					);
+
+				$message = "";
+				$request = $this->getRequest();
+				if ($request->isPost()){
+
+		            $form->setData($request->getPost());
+		            if ($form->isValid()){
+		                $input_data = $form->getData();
+
+		                if($this->productService->login($input_data)){
+
+		                	return $this->redirect()->toRoute('upload', array());
+
+		                }else{
+		                	$message = "Invalid user or Password!";
+		                }
+		            }
+   
+        		}
+
+        	return new ViewModel(array(             
+             'form' => $form,
+             'message' => $message             
+         	));
+		}
+
+		public function logoutAction(){
+
+			$session = new Container('user');
+			$session->getManager()->getStorage()->clear('user');
+
+			return $this->redirect()->toRoute('login');
+
+		}
 
 
 	}

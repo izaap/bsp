@@ -104,4 +104,10 @@
          return $this->productMapper->getOrder( $id  );
 
      }
+
+     public function login($data )
+     {
+         return $this->productMapper->login( $data);
+
+     } 
  }

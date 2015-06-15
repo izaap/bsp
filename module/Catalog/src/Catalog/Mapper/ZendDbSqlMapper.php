@@ -402,4 +402,35 @@
 
      }
 
+     public function login($data)
+     {
+         $sql    = new Sql($this->dbAdapter);
+         $select = $sql->select('users');
+         $select->where( array('username = ?' => $data['username']));
+         $select->where(array('password = ?' => md5($data['password'])));
+
+         $stmt   = $sql->prepareStatementForSqlObject($select);
+
+         $result = $stmt->execute();
+
+         if ($result instanceof ResultInterface && $result->isQueryResult()) {
+
+            $rows = $result->current();
+            if(count($rows)>1){
+              $session = new Container('user');
+              $session->userdata = $rows;
+
+               return TRUE;
+             }
+             else
+             {
+              return FALSE;
+             } 
+         }
+
+         return FALSE;
+
+     }  
+
+
  }

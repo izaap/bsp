@@ -32,4 +32,6 @@
 
     public function getOrder( $data );
 
+    public function login($data); 
+
  }
