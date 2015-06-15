@@ -81,7 +81,10 @@
      public function saveOrderLinks( $data = array() )
      {
         $data['id'] = isset($data['id'])?$data['id']:0;
-        $link = $this->getOrderLink( $data['id'] )->current();
+        $link = $this->getOrderLink( $data['id'] );
+
+        if( $link instanceof ResultInterface )
+          $link = $link->current();
 
         if( $link === FALSE || !count($link) )
         {

@@ -77,8 +77,8 @@
 						<li class="text-right"><?php echo $options[1][$color_id];?></li>
 						<?php foreach ($options[2] as $size_id=>$size_name): ?>
 							<?php 
-								$cpid = $varaints[$size_id]['id'];
-								if( isset($cart_data['products'][$parent_id][$cpid]) ): ?>
+								$cpid = isset($varaints[$size_id]['id'])?$varaints[$size_id]['id']:0;;
+								if( $cpid && isset($cart_data['products'][$parent_id][$cpid]) ): ?>
 								<li><input type="text" value="<?php echo $cart_data['products'][$parent_id][$cpid];?>"></li>
 							<?php else: ?>
 								<li><input class="soldout" disabled name="" value="SOLD&#x00A;OUT" type="submit"></li>

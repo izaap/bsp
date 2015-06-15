@@ -70,7 +70,8 @@
 
 		$('.submit-order').click(function(){
 
-			var flag =true;
+			var flag =true,
+				tot_qty = 0;
 
 			$('.subtot').each(function(){
 
@@ -80,6 +81,8 @@
 					qty 	= $(this).find('.tqty').val(),
 					qty 	= parseInt(qty);
 
+					tot_qty += qty;
+
 				if( qty && qty < min_qty )
 				{
 					alert("You should order atleast "+min_qty+" Qty on Style:"+sku+".");
@@ -87,6 +90,12 @@
 
 				}
 			});
+
+			if(!tot_qty)
+			{
+				alert("You cart is empty.Please buy atleast one product.");
+				flag = false;
+			}
 
 			if( flag )
 			{
