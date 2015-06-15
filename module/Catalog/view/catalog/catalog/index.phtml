@@ -37,11 +37,11 @@
 			?>
 
 			<label for="textfield"></label>
-			<?php echo $this->formInput( $this->form->get('ship_to') ); ?>
+			<?php echo $this->formTextArea( $this->form->get('ship_to') ); ?>
 			<?php echo $this->formElementErrors($form->get('ship_to')); ?>
 
 			<label for="textfield"></label>
-			<?php echo $this->formInput( $this->form->get('bill_to') ); ?>
+			<?php echo $this->formTextArea( $this->form->get('bill_to') ); ?>
 			<?php echo $this->formElementErrors($form->get('bill_to')); ?>
 
 			<?php echo $this->formTextArea( $this->form->get('notes') ); ?>	

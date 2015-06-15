@@ -43,14 +43,14 @@
                  ),
              ),
 
-             'checklist' => array(
+             'confirmation' => array(
                  'type'    => 'segment',
                  'options' => array(
-                     'route'    => '/checklist',
+                     'route'    => '/order/confirmation[/:id]',
                      'constraints' => array( ),
                      'defaults' => array(
                          'controller' => 'Catalog\Controller\Catalog',
-                         'action'     => 'checklist',
+                         'action'     => 'confirmation',
                      ),
                  ),
              ),

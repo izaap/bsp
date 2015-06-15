@@ -26,4 +26,10 @@
 
     public function getProductsByCategory( );
 
+    public function getOrderdProducts( $pids = array(), $cat_ids = array() );
+
+    public function saveOrder( $data );
+
+    public function getOrder( $data );
+
  }

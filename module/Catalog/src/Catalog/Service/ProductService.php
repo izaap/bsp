@@ -85,6 +85,23 @@
      {
          return $this->productMapper->getProductsByCategory( );
 
-     }    
+     } 
 
+     public function getOrderdProducts( $pids = array(), $cat_ids = array() )
+     {
+         return $this->productMapper->getOrderdProducts( $pids , $cat_ids  );
+
+     } 
+
+     public function saveOrder( $data = array() )
+     {
+         return $this->productMapper->saveOrder( $data  );
+
+     }   
+
+     public function getOrder( $id = 0 )
+     {
+         return $this->productMapper->getOrder( $id  );
+
+     }
  }

@@ -11,7 +11,9 @@
  use Zend\Db\Sql\Sql;
  use Zend\Db\Sql\Insert;
  use Zend\Db\Sql\Update;
-
+ use Zend\Db\Sql\Where;
+ 
+ use Zend\Session\Container;
  class ZendDbSqlMapper implements ProductMapperInterface
  {
      /**
@@ -78,8 +80,20 @@
 
      public function saveOrderLinks( $data = array() )
      {
-        $action = new Insert('order_links');
-        $action->values($data);
+        $data['id'] = isset($data['id'])?$data['id']:0;
+        $link = $this->getOrderLink( $data['id'] )->current();
+
+        if( $link === FALSE || !count($link) )
+        {
+          $action = new Insert('order_links');
+          $action->values($data);
+        }
+        else
+        {
+          $action = new Update('order_links');
+          $action->set($data);
+          $action->where(array('id = ?' => $data['id']));
+        }
 
         $sql    = new Sql($this->dbAdapter);
         $stmt = $sql->prepareStatementForSqlObject($action);
@@ -92,6 +106,8 @@
           {
             return $newId;
           }
+
+          return $data['id'];
         }
 
         return false;
@@ -99,6 +115,9 @@
 
      public function getOrderLink( $id )
      {
+           if( !$id )
+            return array();
+
            $sql    = new Sql($this->dbAdapter);
            $select = $sql->select('order_links');
            $select->where(array('id = ?' => $id));
@@ -203,13 +222,30 @@
       * @return PostInterface
       * @throws \InvalidArgumentException
       */
-     public function getProducts( $where )
+     public function getProducts( $data )
      {
            $sql    = new Sql($this->dbAdapter);
            $select = $sql->select('product');
-           $select->where( $where );
+
+           if( isset($data['category_id']) and isset($data['id']) )
+           {
+              $select->join(array('parent' => 'product'), "product.parent_id = parent.id ", array('parent_sku'=>'sku'), $select::JOIN_LEFT);
+              $where = new Where();
+              $where->in('product.category_id', $data['category_id']);
+              $where->OR->in('product.id', $data['id'] );
+
+              $select->where( $where );
+           }
+           else
+           {
+              $select->where( $data );
+           }           
+
+           $qry = $sql->getSqlStringForSqlObject($select);
+           echo $qry;die;
 
            $stmt   = $sql->prepareStatementForSqlObject($select);
+           
            $result = $stmt->execute();
 
            if ($result instanceof ResultInterface && $result->isQueryResult() ) 
@@ -275,6 +311,95 @@
 
          return array();
 
-     }  
+     } 
+
+     public function getOrderdProducts( $pids = array(), $cat_ids = array() )
+     {
+
+        if( !count($pids) && !count($cat_ids) )
+          return array();
+
+        $app_str = "";
+
+        if(count($cat_ids))
+        {
+          $cat_ids  = implode(',', $cat_ids);
+          $app_str .= "category_id IN ($cat_ids) ";
+        }
+
+        if(count($pids))
+        {
+          $pids     = implode(',', $pids);
+          $app_str .= $app_str != ''? " OR ":'';
+          $app_str .= " id IN ($pids) ";
+        }
+        
+        
+        $sql = "SELECT p.*,t.sku as parent_sku FROM (
+                                SELECT parent_id,sku from product 
+                                  WHERE ( $app_str )  
+                                    AND parent_id > 0 group by parent_id 
+                              ) t 
+                          JOIN product p ON(p.parent_id=t.parent_id OR p.id=t.parent_id) 
+                          ORDER BY p.id DESC";
+        //echo $sql;die;                  
+        $statement = $this->dbAdapter->query($sql); 
+
+        $result = $statement->execute();
+
+        if ($result instanceof ResultInterface && $result->isQueryResult()) 
+        {
+          return $result;
+        }
+        return array();
+     } 
+
+     public function saveOrder( $data = array() )
+     {
+
+        $action = new Insert('order');
+        $action->values($data);
+        
+
+        $sql    = new Sql($this->dbAdapter);
+        $stmt = $sql->prepareStatementForSqlObject($action);
+
+        $result = $stmt->execute();
+
+        if ($result instanceof ResultInterface) 
+        {
+          if ($newId = $result->getGeneratedValue()) 
+          {
+            return $newId;
+          }
+
+          return false;
+        }
+
+        return false;
+     }
+
+     /**
+      * @return array|PostInterface[]
+      */
+     public function getOrder( $id = 0 )
+     {
+         $sql    = new Sql($this->dbAdapter);
+         $select = $sql->select();
+
+         $select->from('order');
+         $select->where(array('id = ?' => $id));
+
+         $stmt   = $sql->prepareStatementForSqlObject($select);
+         $result = $stmt->execute();
+
+         if ($result instanceof ResultInterface && $result->isQueryResult()) 
+         {
+             return $result;
+         }
+
+         return array();
+
+     }
 
  }

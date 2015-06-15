@@ -177,21 +177,29 @@ body .forminfo1 .startdate, body .forminfo1 .enddate{width:49%;}
     margin-right: 7px;}
 .productlist .colorswaprow{width:314px;}
 .productlist .video{width:66px; text-align:center;}
-.productlist .colorswaprow li {border: 3px solid #fff;float: left; margin-right:8px;}
-.productlist .colorswaprow li a{float:left; width:43px; height:43px; background:#3e3e3e; border:1px solid #b4b4b4;}
-.productlist .colorswaprow li.black a{background:#3e3e3e;}
-.productlist .colorswaprow li.peri a{background:#A6B1E7;}
-.productlist .colorswaprow li.red a{background:#ff1b2b;}
-.productlist .colorswaprow li.brown a{background:#7c4435;}
-.productlist .colorswaprow li.charcoal a{background:#606060;}
-.productlist .colorswaprow li.lime a{background:#3e3e3e;}
-.productlist .colorswaprow li.orange a{background:#3e3e3e;}
-.productlist .colorswaprow li.purple a{background:#3e3e3e;}
-.productlist .colorswaprow li.cobalt a{background:#3e3e3e;}
-.productlist .colorswaprow li.ivory a{background:#3e3e3e;}
-.productlist .colorswaprow li.white a{background:#3e3e3e;}
-.productlist .colorswaprow li.skyblue a{background:#69c6f7;}
-.productlist .colorswaprow li.blue a{background:#0a60ff;}
+.productlist .colorswaprow li {float: left; margin-right:8px;}
+.productlist .colorswaprow li a{float:left; width:43px; height:43px; }
+.productlist .colorswaprow li.aqua a{background:url(../media/swatch/qua.jpg); background-size: 100%;}
+.productlist .colorswaprow li.black a{background:url(../media/swatch/black.jpg); background-size: 100%;}
+.productlist .colorswaprow li.blackwhite a{background:url(../media/swatch/blackwhite.jpg); background-size: 100%;}
+.productlist .colorswaprow li.brown a{background:url(../media/swatch/brown.jpg); background-size: 100%;}
+.productlist .colorswaprow li.charcoal a{background:url(../media/swatch/charcoal.jpg); background-size: 100%;}
+.productlist .colorswaprow li.cobalt a{background:url(../media/swatch/cobalt.jpg); background-size: 100%;}
+.productlist .colorswaprow li.coral a{background:url(../media/swatch/coral.jpg); background-size: 100%;}
+.productlist .colorswaprow li.fuchsia a{background:url(../media/swatch/fuchsia.jpg); background-size: 100%;}
+.productlist .colorswaprow li.gray a{background:url(../media/swatch/gray.jpg); background-size: 100%;}
+.productlist .colorswaprow li.ivory a{background:url(../media/swatch/ivory.jpg); background-size: 100%;}
+.productlist .colorswaprow li.lemon a{background:url(../media/swatch/lemon.jpg); background-size: 100%;}
+.productlist .colorswaprow li.lime a{background:url(../media/swatch/lime.jpg); background-size: 100%;}
+.productlist .colorswaprow li.navy a{background:url(../media/swatch/navy.jpg); background-size: 100%;}
+.productlist .colorswaprow li.peri a{background:url(../media/swatch/peri.jpg); background-size: 100%;}
+.productlist .colorswaprow li.polkadot a{background:url(../media/swatch/polkadot.jpg); background-size: 100%;}
+.productlist .colorswaprow li.purple a{background:url(../media/swatch/purple.jpg); background-size: 100%;}
+.productlist .colorswaprow li.red a{background:url(../media/swatch/red.jpg); background-size: 100%;}
+.productlist .colorswaprow li.turquoise a{background:url(../media/swatch/turquoise.jpg); background-size: 100%;}
+.productlist .colorswaprow li.white a{background:url(../media/swatch/white.jpg); background-size: 100%;}
+.productlist .colorswaprow li.yellow a{background:url(../media/swatch/yellow.jpg); background-size: 100%;}
+
 
 .productlist h1, .productlist h1 a{font-family: 'fjalla_oneregular'; font-size:36px; color:#494949; display:block;}
 .productlist .item{margin-bottom:15px; position:relative;}

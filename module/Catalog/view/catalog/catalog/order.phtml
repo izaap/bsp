@@ -1,54 +1,59 @@
 	<?php //echo '<pre>';print_r($order_data);?>
-
+<form method="post" id="order-form">
+	<input type="hidden" name="id" value="<?php echo $id;?>">
 	<section class="executive_ara clearfix mb40">
 
 		<div class="stylefor">
 			<h2>STYLES FOR</h2>
 			<h3><?php echo $order_data->name;?></h3>
+		</div>
+
+		<div class="executive_info">
+			<p><img src="<?php echo $this->basePath('public/img/userimg.jpg');?>" width="185" height="176" alt=""></p>
+			<p><h2><span>curated by</span> <?php echo $order_data->executive;?></h2></p>
+		</div>
+
+	</section>
+
+	<section class="forminfo1 clearfix full mb40">
+		<div class="l_sec pull-left">
+			<div class="row clearfix">
+				<div class="lsec">COMPANY NAME:</div> 
+				<div class="rsec"><?php echo $this->formInput( $this->form->get('name') ); ?></div>
 			</div>
 
-			<div class="executive_info">
-				<p><img src="<?php echo $this->basePath('img/userimg.jpg');?>" width="185" height="176" alt=""></p>
-				<p><h2><span>curated by</span> <?php echo $order_data->executive;?></h2></p>
+			<div class="row clearfix">
+				<div class="lsec">SHIP TO ADDRESS:</div> 
+				<div class="rsec"><?php echo $this->formTextArea( $this->form->get('ship_to') ); ?></div>
 			</div>
 
-		</section>
+			<div class="row clearfix">
+				<div class="lsec">BILL TO ADDRESS:</div> 
+				<div class="rsec"><?php echo $this->formTextArea( $this->form->get('bill_to') ); ?></div>
+			</div>
 
-		<section class="forminfo1 clearfix full mb40">
-			<div class="l_sec pull-left">
-				<div class="row clearfix">
-					<div class="lsec">COMPANY NAME:</div> 
-					<div class="rsec"><?php echo $order_data->name;?></div>
+			<div class="row clearfix">
+				<div class="lsec">BUYER’S NOTES:</div> 
+				<div class="rsec">
+					<?php echo $this->formTextArea( $this->form->get('notes') ); ?>	
 				</div>
+			</div>
 
+			<div class="half pull-left">
 				<div class="row clearfix">
-					<div class="lsec">SHIP TO ADDRESS:</div> 
-					<div class="rsec"><p><?php echo $order_data->ship_to;?></p></div>
-				</div>
-
-				<div class="row clearfix">
-					<div class="lsec">BILL TO ADDRESS:</div> 
-					<div class="rsec"><p><?php echo $order_data->bill_to;?></p></div>
-				</div>
-
-				<div class="row clearfix">
-					<div class="lsec">BUYER’S NOTES:</div> 
-					<div class="rsec">
-						<p><?php echo $order_data->notes;?></p>
+					<div class="lsec wid_auto">START DATE:</div> 
+					<div class="rsec wid_auto">
+						<?php echo $this->formInput( $this->form->get('start_date') ); ?>
 					</div>
 				</div>
-
-				<div class="half pull-left">
-					<div class="row clearfix">
-						<div class="lsec wid_auto">START DATE:</div> 
-						<div class="rsec wid_auto"><p><?php echo $order_data->start_date;?></p></div>
+			</div>
+			<div class="half pull-right">
+				<div class="row clearfix pull-right">
+					<div class="lsec wid_auto nowrap">COMPLETION DATE:</div> 
+					<div class="rsec wid_auto">
+						<?php echo $this->formInput( $this->form->get('end_date') ); ?>
 					</div>
 				</div>
-				<div class="half pull-right">
-					<div class="row clearfix pull-right">
-						<div class="lsec wid_auto nowrap">COMPLETION DATE:</div> 
-						<div class="rsec wid_auto"><?php echo $order_data->end_date;?></div>
-					</div>
 			</div>
 
 		</div>
@@ -56,33 +61,38 @@
 		<div class="r_sec pull-right">
 			<div class="row clearfix">
 				<div class="lsec">PO#:</div> 
-				<div class="rsec"><?php echo $order_data->po;?></div>
+				<div class="rsec">
+					<?php echo $this->formInput( $this->form->get('po') ); ?>
+				</div>
 			</div>
 
 			<div class="row clearfix">
 				<div class="lsec">TERMS:</div> 
-				<div class="rsec"><?php echo $order_data->terms;?></div>
+				<div class="rsec">
+					<?php echo $this->formInput( $this->form->get('terms') ); ?>
+				</div>
 			</div>
 
 			<div class="row clearfix">
 				<div class="lsec">BUYERS EMAIL:</div> 
-				<div class="rsec"><?php echo $order_data->buyer_email;?></div>
+				<div class="rsec">
+					<?php echo $this->formInput( $this->form->get('buyer_email') ); ?>
+				</div>
 			</div>
 
 			<div class="row clearfix">
 				<div class="lsec">ACCOUNT EXECUTIVE:</div> 
-				<div class="rsec"><?php echo $order_data->executive;?></div>
+				<div class="rsec">
+					<?php echo $this->formInput( $this->form->get('executive') ); ?>
+				</div>
 			</div>
 
 			<div class="row clearfix">
 				<div class="lsec wid_auto">TOTAL  (without shipping):
-					<p class="total text-center">$2340.00</p>
+					<p class="total text-center grand-total">$00.00</p>
 				</div> 
 				<div class="rsec wid_auto pull-right suborder">
-					<form method="post">
-						<input type="hidden" name="order_id" value="12345" />
-						<input class="btn btn-primary btn-large" type="submit" value="SUBMIT&#x00A;ORDER">
-					</form>
+					<input class="btn btn-primary btn-large submit-order" type="button" value="SUBMIT&#x00A;ORDER">
 				</div>
 
 			</div>
@@ -95,628 +105,185 @@
 
 	<div class="productlist clearfix">
 
-		<!--item loop-->
-		<div class="item">
-			<a href="#"><img class="prothumb main" src="<?php echo $this->basePath('img');?>/TU303-BLACK.jpg" width="380" height="700" alt=""> </a>
-			<div style="position: absolute; top: 0px;" id="videoModal">
-				<video height="700" width="380" loop controls id="videoPlayer">
-					<source type="video/mp4" src="https://clarasunwoo.com/onlineshop/images/DR5002P-RED.mp4"></source>
-					<source type="video/ogg" src="https://clarasunwoo.com/onlineshop/images/DR5002P-RED.ogg"></source>
-					Your browser does not support the video tag.
-				</video> 
-			</div>
-			<div class="pro_shortinfo">
-				<div class="colorswaprow pull-left">
-					<ul>
-						<li class="black"><a href="<?php echo $this->basePath('img');?>/TU303-BLACK.jpg" onclick="swap(this); return false;"></a></li>
-						<li class="peri"><a onclick="swap(this); return false;" href="<?php echo $this->basePath('img');?>/TU303P-TURQUOISE.jpg"></a></li>
-						<li class="red"><a onclick="swap(this); return false;" href="<?php echo $this->basePath('img');?>/DR5002P-RED.jpg"></a></li>
-						<li class="brown"><a onclick="swap(this); return false;" href="<?php echo $this->basePath('img');?>/JU88P-CHEETAH.jpg"></a></li>
-						<li class="charcoal"><a onclick="swap(this); return false;" href="<?php echo $this->basePath('img');?>/TU303P-YELLOW.jpg"></a></li>
-
-					</ul>
+		<?php foreach ($parent_details as $parent_id => $parent): ?>
+			<?php 
+				$mpc = current(array_keys($pdetails[$parent_id]));
+				$color_name = $options[1][$mpc];
+			?>
+			<div class="item">
+				<a href="#"><img class="prothumb main" src="<?php echo $this->basePath('public/media/'.$parent['sku'].'-'.strtoupper($color_name).'.jpg');?>" width="380" height="700" alt=""> </a>
+				<div style="position: absolute; top: 0px;" id="videoModal_<?php echo $parent_id;?>">
+					<video height="700" width="380" loop controls id="videoPlayer_<?php echo $parent_id;?>">
+						<source type="video/mp4" src="<?php echo $this->basePath('public/media/'.$parent['sku'].'.mp4');?>"></source>
+						<source type="video/ogg" src="<?php echo $this->basePath('public/media/'.$parent['sku'].'.ogg');?>"></source>
+						Your browser does not support the video tag.
+					</video> 
 				</div>
-				<div class="video pull-right"><img  class="videoPlay" src="<?php echo $this->basePath('img');?>/play_icon.png" width="66" height="75" alt="Play Video"></div>
-
-				<div class="clearfix"></div>
-				<div class="text-center"><h1><a href="#">DR12</a></h1>
-
-					<p> geo floral print cowl drape soft knit dress with hem sleeves</p>
+				<div class="pro_shortinfo">
+					<div class="colorswaprow pull-left">
+						<ul>
+							<?php foreach ($pdetails[$parent_id] as $color_id => $varaints):?>
+							<?php
+								$color_name = $options[1][$color_id];
+								$swatch_img = $parent['sku'].'-'.strtoupper($color_name).'.jpg';
+							?>
+							<li class="<?php echo strtolower($color_name);?>">
+								<a href="<?php echo $this->basePath("public/media/$swatch_img");?>" onclick="swap(this); return false;"></a>
+							</li>
+							<?php endforeach;?>
+						</ul>
+						
+					</div>
+					<div class="video pull-right">
+						<img  class="videoPlay" data-id="<?php echo $parent_id;?>" id="videoPlay_<?php echo $parent_id;?>" src="<?php echo $this->basePath('public/img');?>/play_icon.png" width="66" height="75" alt="Play Video">
+					</div>
 
 					<div class="clearfix"></div>
+					<div class="text-center">
 
-					<div class="sizes">
-						<ul>
-							<li></li>
-							<li><small>XS</small></li>
-							<li><small>S</small></li>
-							<li><small>M</small></li>
-							<li><small>L</small></li>
-							<li><small>XL</small></li>
-							<li><small>1X</small></li>
-						</ul>
-						<div class="clearfix"></div>
+						<h1><a href="#"><?php echo $parent['sku'];?></a></h1>
 
-						<ul>
-							<li class="text-right">Black</li>
-							<li><input name="" type="text"></li>
-							<li><input type="text" value="2"></li>
-							<li><input type="text" value="2"></li>
-							<li><input type="text" value="2"></li>
-							<li><input name="" type="text"></li>
-							<li><input class="soldout" disabled name="" value="SOLD&#x00A;OUT" type="submit"></li>
-						</ul>
+						<p> <?php echo $parent['description'];?></p>
 
 						<div class="clearfix"></div>
-						<ul class="subtot">
-							<li>$39.00 x</li><li><input type="text" value="6"></li><li>= $234</li>
-						</ul>
+
+						<div class="sizes">
+							<ul>
+								<li></li>
+								<?php 
+									foreach ($options[2] as $size) 
+									{
+										echo "<li><small>$size</small></li>";
+									}
+								?>
+							</ul>
+							<div class="clearfix"></div>
+
+							<?php foreach ($pdetails[$parent_id] as $color_id => $varaints):?>
+							<ul class="colors" >
+								<li class="text-right"><?php echo $options[1][$color_id];?></li>
+								<?php foreach ($options[2] as $size_id=>$size_name): ?>
+									<?php if( in_array( $size_id, array_keys($varaints) ) ): $cpid = $varaints[$size_id]['id'];?>
+										<li><input class="cart_qty" data-min-qty="<?php echo $parent['min_qty'];?>" data-psku="<?php echo $parent['sku'];?>" data-sku-color="<?php echo $parent['sku'].'-'.$color_id;?>" name="product[<?php echo $parent_id;?>][<?php echo $cpid;?>]" type="text"></li>
+									<?php else: ?>
+										<li><input class="soldout" disabled name="" value="SOLD&#x00A;OUT" type="submit"></li>
+									<?php endif; ?>
+								<?php endforeach; ?>
+							</ul>
+							<?php endforeach;?>	
+
+							<div class="clearfix"></div>
+							<ul class="subtot" data-sku="<?php echo $parent['sku'];?>" data-price="<?php echo $parent['price'];?>" data-min-qty="<?php echo $parent['min_qty'];?>" >
+								<li>$<?php echo number_format($parent['price'], 2, '.', '');?> x</li>
+								<li>
+									<input disabled type="submit"  value="0" class="tqty">
+								</li>
+								<li class="total_price" >= $0 </li>
+							</ul>
+						</div>
+
 					</div>
 
 				</div>
+			</div>			
+		<?php endforeach; ?>	
+	
+	</div>
 
-			</div>
-		</div>
+	<!--//closeouts section-->
+	<?php if( count($close_outs) ): ?>
+	<section class="closeouts clearfix">
+		<h2>CLOSEOUTS</h2>
+		<div class="productlist clearfix">
 
-		<!--item loop-->
-		<div class="item">
-			<a href="#"><img class="prothumb main" src="<?php echo $this->basePath('img');?>/proimg.jpg" width="380" height="700" alt=""> </a>
-			<div class="pro_shortinfo">
-				<div class="colorswaprow pull-left">
-					<ul>
-						<li class="black"><a href="#"></a></li>
-						<li class="brown"><a href="#"></a></li>
-					</ul>
-				</div>
-				<div class="video pull-right"><a href="#"><img src="<?php echo $this->basePath('img');?>/play_icon.png" width="66" height="75" alt="Play Video"></a></div>
-
-				<div class="clearfix"></div>
-				<div class="text-center"><h1><a href="#">DR12</a></h1>
-
-					<p> geo floral print cowl drape soft knit dress with hem sleeves</p>
-
-					<div class="clearfix"></div>
-
-					<div class="sizes">
-						<ul>
-							<li></li>
-							<li><small>XS</small></li>
-							<li><small>S</small></li>
-							<li><small>M</small></li>
-							<li><small>L</small></li>
-							<li><small>XL</small></li>
-							<li><small>1X</small></li>
-						</ul>
+			<?php foreach ($close_outs as $parent_id => $parent): ?>
+				<div class="item">
+					<a href="#"><img class="prothumb main" src="<?php echo $this->basePath('public/img');?>/proimg.jpg" width="380" height="700" alt=""> </a>
+					<div class="pro_shortinfo">
+						<div class="colorswaprow pull-left">
+							<ul>
+								<?php foreach ($pdetails[$parent_id] as $color_id => $varaints):?>
+								<?php
+									$color_name = $options[1][$color_id];
+									$swatch_img = $parent['sku'].'-'.strtoupper($color_name).'.jpg';
+								?>
+								<li class="<?php echo strtolower($color_name);?>">
+									<a href="<?php echo $this->basePath("public/media/$swatch_img");?>" onclick="swap(this); return false;"></a>
+								</li>
+								<?php endforeach;?>
+							</ul>
+							
+						</div>
+						
 
 						<div class="clearfix"></div>
+						<div class="text-center">
 
-						<ul>
-							<li class="text-right">Black</li>
-							<li><input name="" type="text"></li>
-							<li><input type="text" value="2"></li>
-							<li><input type="text" value="2"></li>
-							<li><input type="text" value="2"></li>
-							<li><input name="" type="text"></li>
-							<li><input class="soldout" disabled name="" value="SOLD&#x00A;OUT" type="submit"></li>
-						</ul>
-						<div class="clearfix"></div>
+							<h1><a href="#"><?php echo $parent['sku'];?></a></h1>
 
-						<ul>
-							<li class="text-right">BROWN</li>
-							<li><input name="" type="text"></li>
-							<li><input type="text" value="1"></li>
-							<li><input type="text" value="1"></li>
-							<li><input type="text" value="2"></li>
-							<li><input name="" type="text"></li>
-							<li><input name="" type="text"></li>
-						</ul>
-						<div class="clearfix"></div>
-						<ul class="subtot">
-							<li>$39.00 x</li><li><input type="text" value="10"></li><li>= $234</li>
-						</ul>
+							<p> <?php echo $parent['description'];?></p>
+
+							<div class="clearfix"></div>
+
+							<div class="sizes">
+								<ul>
+									<li></li>
+									<?php 
+										foreach ($options[2] as $size) 
+										{
+											echo "<li><small>$size</small></li>";
+										}
+									?>
+								</ul>
+								<div class="clearfix"></div>
+
+								<?php foreach ($pdetails[$parent_id] as $color_id => $varaints):?>
+								<ul class="colors">
+									<li class="text-right"><?php echo $options[1][$color_id];?></li>
+									<?php foreach ($options[2] as $size_id=>$size_name): ?>
+										<?php if( in_array( $size_id, array_keys($varaints) ) ): $cpid = $varaints[$size_id]['id'];?>
+											<li><input class="cart_qty" data-min-qty="<?php echo $parent['min_qty'];?>" data-psku="<?php echo $parent['sku'];?>" data-sku-color="<?php echo $parent['sku'].'-'.$color_id;?>" name="product[<?php echo $parent_id;?>][<?php echo $cpid;?>]" type="text"></li>
+										<?php else: ?>
+											<li><input class="soldout" disabled name="" value="SOLD&#x00A;OUT" type="submit"></li>
+										<?php endif; ?>
+									<?php endforeach; ?>
+								</ul>
+								<?php endforeach;?>	
+
+								<div class="clearfix"></div>
+								<ul class="subtot" data-sku="<?php echo $parent['sku'];?>" data-price="<?php echo $parent['price'];?>" data-min-qty="<?php echo $parent['min_qty'];?>" >
+									<li>$<?php echo number_format($parent['price'], 2, '.', '');?> x</li>
+									<li>
+										<input disabled type="submit"  value="0" class="tqty">
+									</li>
+									<li class="total_price" >= $0 </li>
+								</ul>
+							</div>
+
+						</div>
+
 					</div>
+				</div>			
+			<?php endforeach; ?>
+			<!--item loop-->
 
-				</div>
 
-			</div>
+			
+
 		</div>
+	</section>
+	<?php endif; ?>
+	<!--closeouts section\\-->
 
-		<!--item loop-->
-		<div class="item">
-			<a href="#"><img class="prothumb main" src="<?php echo $this->basePath('img');?>/proimg.jpg" width="380" height="700" alt=""> </a>
-			<div class="pro_shortinfo">
-				<div class="colorswaprow pull-left">
-					<ul>
-						<li class="skyblue"><a href="#"></a></li>
-						<li class="red"><a href="#"></a></li>
-						<li class="darkblue"><a href="#"></a></li>
-					</ul>
-				</div>
-				<div class="video pull-right"><a href="#"><img src="<?php echo $this->basePath('img');?>/play_icon.png" width="66" height="75" alt="Play Video"></a></div>
+	<!--//Total submit-order section-->
+	<div class="submitorder row wid_auto pull-right clearfix">
+		<div class="lsec wid_auto mr0"><p class="total text-center"><span>TOTAL:</span> <span class="grand-total">$00.00</span></p>
+		</div> 
 
-				<div class="clearfix"></div>
-				<div class="text-center"><h1><a href="#">DR12</a></h1>
-
-					<p> geo floral print cowl drape soft knit dress with hem sleeves</p>
-
-					<div class="clearfix"></div>
-
-					<div class="sizes">
-						<ul>
-							<li></li>
-							<li><small>XS</small></li>
-							<li><small>S</small></li>
-							<li><small>M</small></li>
-							<li><small>L</small></li>
-							<li><small>XL</small></li>
-							<li><small>1X</small></li>
-						</ul>
-
-						<div class="clearfix"></div>
-
-						<ul>
-							<li class="text-right">PERI-BLUE</li>
-							<li><input name="" type="text"></li>
-							<li><input type="text" value="2"></li>
-							<li><input type="text" value="2"></li>
-							<li><input type="text" value="2"></li>
-							<li><input name="" type="text"></li>
-							<li><input class="soldout" disabled name="" value="SOLD&#x00A;OUT" type="submit"></li>
-						</ul>
-						<div class="clearfix"></div>
-
-						<ul>
-							<li class="text-right">RED</li>
-							<li><input name="" type="text"></li>
-							<li><input type="text" value="1"></li>
-							<li><input type="text" value="1"></li>
-							<li><input type="text" value="2"></li>
-							<li><input name="" type="text"></li>
-							<li><input name="" type="text"></li>
-						</ul>
-						<div class="clearfix"></div>
-
-						<ul>
-							<li class="text-right">COBALT</li>
-							<li><input name="" type="text"></li>
-							<li><input type="text" value="1"></li>
-							<li><input type="text" value="1"></li>
-							<li><input type="text" value="2"></li>
-							<li><input name="" type="text"></li>
-							<li><input name="" type="text"></li>
-						</ul>
-						<div class="clearfix"></div>
-
-						<ul class="subtot">
-							<li>$39.00 x</li><li><input type="text" value="10"></li><li>= $234</li>
-						</ul>
-					</div>
-
-				</div>
-
-			</div>
+		<div class="rsec wid_auto pull-right suborder">		
+				<input class="btn btn-primary btn-large submit-order" type="button" value="SUBMIT&#x00A;ORDER">		
 		</div>
-
-		<!--item loop-->
-		<div class="item">
-			<a href="#"><img class="prothumb main" src="<?php echo $this->basePath('img');?>/proimg.jpg" width="380" height="700" alt=""> </a>
-			<div class="pro_shortinfo">
-				<div class="colorswaprow pull-left">
-					<ul>
-						<li class="black"><a href="#"></a></li>
-	<!-- <li class="peri"><a href="#"></a></li>
-	<li class="red"><a href="#"></a></li>
-	<li class="brown"><a href="#"></a></li>
-	<li class="charcoal"><a href="#"></a></li>
-	<li class="lime"><a href="#"></a></li>
-	<li class="orange"><a href="#"></a></li>
-	<li class="purple"><a href="#"></a></li>
-	<li class="cobalt"><a href="#"></a></li>
-	<li class="ivory"><a href="#"></a></li>
-	<li class="white"><a href="#"></a></li>-->
-</ul>
-</div>
-<div class="video pull-right"><a href="#"><img src="<?php echo $this->basePath('img');?>/play_icon.png" width="66" height="75" alt="Play Video"></a></div>
-
-<div class="clearfix"></div>
-<div class="text-center"><h1><a href="#">DR12</a></h1>
-
-	<p> geo floral print cowl drape soft knit dress with hem sleeves</p>
-
-	<div class="clearfix"></div>
-
-	<div class="sizes">
-		<ul>
-			<li></li>
-			<li><small>XS</small></li>
-			<li><small>S</small></li>
-			<li><small>M</small></li>
-			<li><small>L</small></li>
-			<li><small>XL</small></li>
-			<li><small>1X</small></li>
-		</ul>
-		<div class="clearfix"></div>
-
-		<ul>
-			<li class="text-right">Black</li>
-			<li><input name="" type="text"></li>
-			<li><input type="text" value="2"></li>
-			<li><input type="text" value="2"></li>
-			<li><input type="text" value="2"></li>
-			<li><input name="" type="text"></li>
-			<li><input class="soldout" disabled name="" value="SOLD&#x00A;OUT" type="submit"></li>
-		</ul>
-
-		<div class="clearfix"></div>
-		<ul class="subtot">
-			<li>$39.00 x</li><li><input type="text" value="6"></li><li>= $234</li>
-		</ul>
 	</div>
+		<!--Total submit-order section\\-->
 
-</div>
-
-</div>
-</div>
-
-<!--item loop-->
-<div class="item">
-	<a href="#"><img class="prothumb main" src="<?php echo $this->basePath('img');?>/proimg.jpg" width="380" height="700" alt=""> </a>
-	<div class="pro_shortinfo">
-		<div class="colorswaprow pull-left">
-			<ul>
-				<li class="black"><a href="#"></a></li>
-				<li class="brown"><a href="#"></a></li>
-			</ul>
-		</div>
-		<div class="video pull-right"><a href="#"><img src="<?php echo $this->basePath('img');?>/play_icon.png" width="66" height="75" alt="Play Video"></a></div>
-
-		<div class="clearfix"></div>
-		<div class="text-center"><h1><a href="#">DR12</a></h1>
-
-			<p> geo floral print cowl drape soft knit dress with hem sleeves</p>
-
-			<div class="clearfix"></div>
-
-			<div class="sizes">
-				<ul>
-					<li></li>
-					<li><small>XS</small></li>
-					<li><small>S</small></li>
-					<li><small>M</small></li>
-					<li><small>L</small></li>
-					<li><small>XL</small></li>
-					<li><small>1X</small></li>
-				</ul>
-
-				<div class="clearfix"></div>
-
-				<ul>
-					<li class="text-right">Black</li>
-					<li><input name="" type="text"></li>
-					<li><input type="text" value="2"></li>
-					<li><input type="text" value="2"></li>
-					<li><input type="text" value="2"></li>
-					<li><input name="" type="text"></li>
-					<li><input class="soldout" disabled name="" value="SOLD&#x00A;OUT" type="submit"></li>
-				</ul>
-				<div class="clearfix"></div>
-
-				<ul>
-					<li class="text-right">BROWN</li>
-					<li><input name="" type="text"></li>
-					<li><input type="text" value="1"></li>
-					<li><input type="text" value="1"></li>
-					<li><input type="text" value="2"></li>
-					<li><input name="" type="text"></li>
-					<li><input name="" type="text"></li>
-				</ul>
-				<div class="clearfix"></div>
-				<ul class="subtot">
-					<li>$39.00 x</li><li><input type="text" value="10"></li><li>= $234</li>
-				</ul>
-			</div>
-
-		</div>
-
-	</div>
-</div>
-
-<!--item loop-->
-<div class="item">
-	<a href="#"><img class="prothumb main" src="<?php echo $this->basePath('img');?>/proimg.jpg" width="380" height="700" alt=""> </a>
-	<div class="pro_shortinfo">
-		<div class="colorswaprow pull-left">
-			<ul>
-				<li class="skyblue"><a href="#"></a></li>
-				<li class="red"><a href="#"></a></li>
-				<li class="darkblue"><a href="#"></a></li>
-			</ul>
-		</div>
-		<div class="video pull-right"><a href="#"><img src="<?php echo $this->basePath('img');?>/play_icon.png" width="66" height="75" alt="Play Video"></a></div>
-
-		<div class="clearfix"></div>
-		<div class="text-center"><h1><a href="#">DR12</a></h1>
-
-			<p> geo floral print cowl drape soft knit dress with hem sleeves</p>
-
-			<div class="clearfix"></div>
-
-			<div class="sizes">
-				<ul>
-					<li></li>
-					<li><small>XS</small></li>
-					<li><small>S</small></li>
-					<li><small>M</small></li>
-					<li><small>L</small></li>
-					<li><small>XL</small></li>
-					<li><small>1X</small></li>
-				</ul>
-
-				<div class="clearfix"></div>
-
-				<ul>
-					<li class="text-right">PERI-BLUE</li>
-					<li><input name="" type="text"></li>
-					<li><input type="text" value="2"></li>
-					<li><input type="text" value="2"></li>
-					<li><input type="text" value="2"></li>
-					<li><input name="" type="text"></li>
-					<li><input class="soldout" disabled name="" value="SOLD&#x00A;OUT" type="submit"></li>
-				</ul>
-				<div class="clearfix"></div>
-
-				<ul>
-					<li class="text-right">RED</li>
-					<li><input name="" type="text"></li>
-					<li><input type="text" value="1"></li>
-					<li><input type="text" value="1"></li>
-					<li><input type="text" value="2"></li>
-					<li><input name="" type="text"></li>
-					<li><input name="" type="text"></li>
-				</ul>
-				<div class="clearfix"></div>
-
-				<ul>
-					<li class="text-right">COBALT</li>
-					<li><input name="" type="text"></li>
-					<li><input type="text" value="1"></li>
-					<li><input type="text" value="1"></li>
-					<li><input type="text" value="2"></li>
-					<li><input name="" type="text"></li>
-					<li><input name="" type="text"></li>
-				</ul>
-				<div class="clearfix"></div>
-
-				<ul class="subtot">
-					<li>$39.00 x</li><li><input type="text" value="10"></li><li>= $234</li>
-				</ul>
-			</div>
-
-		</div>
-
-	</div>
-</div>
-
-</div>
-
-<!--//closeouts section-->
-<section class="closeouts clearfix">
-	<h2>CLOSEOUTS</h2>
-	<div class="productlist clearfix">
-		<!--item loop-->
-		<div class="item">
-			<a href="#"><img class="prothumb main" src="<?php echo $this->basePath('img');?>/proimg.jpg" width="380" height="700" alt=""> </a>
-			<div class="pro_shortinfo">
-				<div class="colorswaprow pull-left">
-					<ul>
-						<li class="black"><a href="#"></a></li>
-	<!-- <li class="peri"><a href="#"></a></li>
-	<li class="red"><a href="#"></a></li>
-	<li class="brown"><a href="#"></a></li>
-	<li class="charcoal"><a href="#"></a></li>
-	<li class="lime"><a href="#"></a></li>
-	<li class="orange"><a href="#"></a></li>
-	<li class="purple"><a href="#"></a></li>
-	<li class="cobalt"><a href="#"></a></li>
-	<li class="ivory"><a href="#"></a></li>
-	<li class="white"><a href="#"></a></li>-->
-</ul>
-</div>
-<div class="video pull-right"><a href="#"><img src="<?php echo $this->basePath('img');?>/play_icon.png" width="66" height="75" alt="Play Video"></a></div>
-
-<div class="clearfix"></div>
-<div class="text-center"><h1><a href="#">DR12</a></h1>
-
-	<p> geo floral print cowl drape soft knit dress with hem sleeves</p>
-
-	<div class="clearfix"></div>
-
-	<div class="sizes">
-		<ul>
-			<li></li>
-			<li><small>XS</small></li>
-			<li><small>S</small></li>
-			<li><small>M</small></li>
-			<li><small>L</small></li>
-			<li><small>XL</small></li>
-			<li><small>1X</small></li>
-		</ul>
-		<div class="clearfix"></div>
-
-		<ul>
-			<li class="text-right">Black</li>
-			<li><input name="" type="text"></li>
-			<li><input type="text" value="2"></li>
-			<li><input type="text" value="2"></li>
-			<li><input type="text" value="2"></li>
-			<li><input name="" type="text"></li>
-			<li><input class="soldout" disabled name="" value="SOLD&#x00A;OUT" type="submit"></li>
-		</ul>
-
-		<div class="clearfix"></div>
-		<ul class="subtot">
-			<li>$39.00 x</li><li><input type="text" value="6"></li><li>= $234</li>
-		</ul>
-	</div>
-
-</div>
-
-</div>
-</div>
-
-<!--item loop-->
-<div class="item">
-	<a href="#"><img class="prothumb main" src="<?php echo $this->basePath('img');?>/proimg.jpg" width="380" height="700" alt=""> </a>
-	<div class="pro_shortinfo">
-		<div class="colorswaprow pull-left">
-			<ul>
-				<li class="black"><a href="#"></a></li>
-				<li class="brown"><a href="#"></a></li>
-			</ul>
-		</div>
-		<div class="video pull-right"><a href="#"><img src="<?php echo $this->basePath('img');?>/play_icon.png" width="66" height="75" alt="Play Video"></a></div>
-
-		<div class="clearfix"></div>
-		<div class="text-center"><h1><a href="#">DR12</a></h1>
-
-			<p> geo floral print cowl drape soft knit dress with hem sleeves</p>
-
-			<div class="clearfix"></div>
-
-			<div class="sizes">
-				<ul>
-					<li></li>
-					<li><small>XS</small></li>
-					<li><small>S</small></li>
-					<li><small>M</small></li>
-					<li><small>L</small></li>
-					<li><small>XL</small></li>
-					<li><small>1X</small></li>
-				</ul>
-
-				<div class="clearfix"></div>
-
-				<ul>
-					<li class="text-right">Black</li>
-					<li><input name="" type="text"></li>
-					<li><input type="text" value="2"></li>
-					<li><input type="text" value="2"></li>
-					<li><input type="text" value="2"></li>
-					<li><input name="" type="text"></li>
-					<li><input class="soldout" disabled name="" value="SOLD&#x00A;OUT" type="submit"></li>
-				</ul>
-				<div class="clearfix"></div>
-
-				<ul>
-					<li class="text-right">BROWN</li>
-					<li><input name="" type="text"></li>
-					<li><input type="text" value="1"></li>
-					<li><input type="text" value="1"></li>
-					<li><input type="text" value="2"></li>
-					<li><input name="" type="text"></li>
-					<li><input name="" type="text"></li>
-				</ul>
-				<div class="clearfix"></div>
-				<ul class="subtot">
-					<li>$39.00 x</li><li><input type="text" value="10"></li><li>= $234</li>
-				</ul>
-			</div>
-
-		</div>
-
-	</div>
-</div>
-
-<!--item loop-->
-<div class="item">
-	<a href="#"><img class="prothumb main" src="<?php echo $this->basePath('img');?>/proimg.jpg" width="380" height="700" alt=""> </a>
-	<div class="pro_shortinfo">
-		<div class="colorswaprow pull-left">
-			<ul>
-				<li class="skyblue"><a href="#"></a></li>
-				<li class="red"><a href="#"></a></li>
-				<li class="darkblue"><a href="#"></a></li>
-			</ul>
-		</div>
-		<div class="video pull-right"><a href="#"><img src="<?php echo $this->basePath('img');?>/play_icon.png" width="66" height="75" alt="Play Video"></a></div>
-
-		<div class="clearfix"></div>
-		<div class="text-center"><h1><a href="#">DR12</a></h1>
-
-			<p> geo floral print cowl drape soft knit dress with hem sleeves</p>
-
-			<div class="clearfix"></div>
-
-			<div class="sizes">
-				<ul>
-					<li></li>
-					<li><small>XS</small></li>
-					<li><small>S</small></li>
-					<li><small>M</small></li>
-					<li><small>L</small></li>
-					<li><small>XL</small></li>
-					<li><small>1X</small></li>
-				</ul>
-
-				<div class="clearfix"></div>
-
-				<ul>
-					<li class="text-right">PERI-BLUE</li>
-					<li><input name="" type="text"></li>
-					<li><input type="text" value="2"></li>
-					<li><input type="text" value="2"></li>
-					<li><input type="text" value="2"></li>
-					<li><input name="" type="text"></li>
-					<li><input class="soldout" disabled name="" value="SOLD&#x00A;OUT" type="submit"></li>
-				</ul>
-				<div class="clearfix"></div>
-
-				<ul>
-					<li class="text-right">RED</li>
-					<li><input name="" type="text"></li>
-					<li><input type="text" value="1"></li>
-					<li><input type="text" value="1"></li>
-					<li><input type="text" value="2"></li>
-					<li><input name="" type="text"></li>
-					<li><input name="" type="text"></li>
-				</ul>
-				<div class="clearfix"></div>
-
-				<ul>
-					<li class="text-right">COBALT</li>
-					<li><input name="" type="text"></li>
-					<li><input type="text" value="1"></li>
-					<li><input type="text" value="1"></li>
-					<li><input type="text" value="2"></li>
-					<li><input name="" type="text"></li>
-					<li><input name="" type="text"></li>
-				</ul>
-				<div class="clearfix"></div>
-
-				<ul class="subtot">
-					<li>$39.00 x</li><li><input type="text" value="10"></li><li>= $234</li>
-				</ul>
-			</div>
-
-		</div>
-
-	</div>
-</div>
-
-</div>
-</section>
-<!--closeouts section\\-->
-
-<!--//Total submit-order section-->
-<div class="submitorder row wid_auto pull-right clearfix">
-	<div class="lsec wid_auto mr0"><p class="total text-center"><span>TOTAL:</span> $2340.00</p>
-	</div> 
-
-	<div class="rsec wid_auto pull-right suborder">
-		<form method="post">
-			<input type="hidden" name="order_id" value="12345" />
-			<input class="btn btn-primary btn-large" type="submit" value="SUBMIT&#x00A;ORDER">
-		</form>
-	</div>
-</div>
-	<!--Total submit-order section\\-->
+</form>
